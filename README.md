@@ -14,3 +14,10 @@ In public mode, hashserv should use the latest Bitcoin blockchain hash, and Bitc
 
 #### 3. Downloading
 Users may download files via GET by requesting the hash of the files. The data will most likely be encrypted and the user will have decrypt the file client side. 
+
+#### 4. Exporting
+Hashserv nodes should have a finite capacity for data storage. They should utilize other hashserv nodes, and DriveShare users to offload capacity. Data stored off node should be clearly marked as such.
+
+#### 5. Payment
+Early versions of this software will accept data freely within capacity limits. Upload and download actions should be metered, as this will be used to later charge uploaders and downloaders. 
+
