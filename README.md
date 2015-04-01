@@ -11,7 +11,7 @@ A hashserv can accept, preferably encrypted, files and pieces of files. This dat
 
 The hashserv should list all files it is currently storing. All files are to be addressed by their hash. File name, and any other metadata should be discarded on upload. A cryptographical audit of each file should also be displayed. When audits should be completed will be up to the settings of the hashserv node. 
 
-For public audits, hashserv should use the latest Bitcoin blockchain hash, and Bitcoin blocks as its timescale. For private audits, the user who uploaded the file will be responsible issuing and verifying challenges.
+For public audits, hashserv should use the latest Bitcoin blockchain hash, and Bitcoin blocks as its timescale. For private audits, the user who uploaded the file will be responsible for issuing and verifying challenges.
 
 #### 3. Downloading
 Users may download files via GET by requesting the hash of the files. The data will most likely be encrypted and the user will have decrypt the file client side. The hashserv node may also choose to serve decrypted content over HTTP. 
