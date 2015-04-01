@@ -14,7 +14,7 @@ The hashserv should list all files it is currently storing. All files are to be 
 For public audits, hashserv should use the latest Bitcoin blockchain hash, and Bitcoin blocks as its timescale. For private audits, the user who uploaded the file will be responsible for issuing and verifying challenges.
 
 #### 3. Downloading
-Users may download files via GET by requesting the hash of the files. The data will most likely be encrypted and the user will have decrypt the file client side. The hashserv node may also choose to serve decrypted content over HTTP. 
+Users may download files via GET by requesting the hash of the files. The data will most likely be encrypted and the user will have to decrypt the file client side. The hashserv node may also choose to serve decrypted content over HTTP. 
 
 #### 4. Exporting
 Hashserv nodes  have a finite capacity for data storage. They may utilize other hashserv nodes, and [DriveShare](http://driveshare.org) users to offload capacity. Data stored off node should be clearly marked as such.
