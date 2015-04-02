@@ -40,6 +40,6 @@ Download a file from a hashserv node:
 
 Serve a file from a hashserv node:
 
-	GET /api/server/<filehash>/<file_extension>
+	GET /api/serve/<filehash>/<file_extension>
     Parameters:
 	- filehash, file_extension
