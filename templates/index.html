@@ -11,18 +11,22 @@
 		<hr/>
 
 		<div>
-			<form action="upload" method="post" enctype="multipart/form-data">
+			<form action="api/upload" method="post" enctype="multipart/form-data">
 				<input type="file" name="file"><br /><br />
 				<input type="submit" value="Upload">
 			</form>
 		</div>
 
-		
-
 		<div class="header" style="margin-top: 100px;">
 			<h3 class="text-muted">Files on Disk</h3>
+			<hr/>
+			<ul>
+			{% for file in files %}
+			  <li>{{ file }}</li>
+			{% endfor %}
+			</ul>
 		</div>
-		<hr/>
+		
 
 	</div>
 </body>
