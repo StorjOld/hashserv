@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
-          rel="stylesheet">
-  </head>
-  <body>
-    <div class="container">
-      <div class="header">
-        <h3 class="text-muted">How To Upload a File</h3>
-      </div>
-      <hr/>
-      <div>
-      
-      <form action="upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="file"><br /><br />
-        <input type="submit" value="Upload">
-      </form>
-      </div>
-    </div>
-  </body>
+<head>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div class="header">
+			<h3 class="text-muted">Upload a File</h3>
+		</div>
+		<hr/>
+
+		<div>
+			<form action="upload" method="post" enctype="multipart/form-data">
+				<input type="file" name="file"><br /><br />
+				<input type="submit" value="Upload">
+			</form>
+		</div>
+
+		
+
+		<div class="header" style="margin-top: 100px;">
+			<h3 class="text-muted">Files on Disk</h3>
+		</div>
+		<hr/>
+
+	</div>
+</body>
 </html>
- 
