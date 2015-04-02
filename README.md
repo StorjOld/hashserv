@@ -22,13 +22,15 @@ Hashserv nodes  have a finite capacity for data storage. They may utilize other 
 #### 5. Payment
 Early versions of this software will accept data freely within capacity limits. Upload and download actions should be metered, as this will be used to later charge uploaders and downloaders. 
 
-## API
+## 1. Upload API
 
 Upload a file to a hashserv node:
 
     POST /api/upload
     Parameters:
     - file
+
+## 3. Download API
 
 Download a file from a hashserv node:
 	
