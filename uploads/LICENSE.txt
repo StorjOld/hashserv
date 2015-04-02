@@ -1,0 +1,285 @@
+ActiveState Komodo IDE License Agreement
+
+Please read carefully: THIS IS A LICENSE AND NOT AN AGREEMENT FOR SALE. By using
+and installing ActiveState's Software or, where applicable, choosing the "I
+ACCEPT..." option at the end of the License you indicate that you have read,
+understood, and accepted the terms and conditions of the License. IF YOU DO NOT
+AGREE WITH THE TERMS AND CONDITIONS, YOU SHOULD NOT ATTEMPT TO INSTALL THE
+SOFTWARE. If the Software is already downloaded or installed, you should
+promptly cease using the Software in any manner and destroy all copies of the
+Software in your possession. You, the user, assume all responsibility for the
+selection of the Software to achieve your intended results and for the
+installation, use and results obtained from the Software. If you have any
+questions concerning this, you may contact ActiveState via
+license@activestate.com.
+
+This ActiveState License ("License") is made between ActiveState ("ActiveState")
+as licensor, and you, as licensee, as of the date of your use of the Software
+(the Software is in use on a computer when it is loaded into the RAM or
+installed into the permanent memory (e.g., hard disk or other storage device) of
+that computer.).
+
+This License reflects ActiveState's intent to retain full ownership of and
+control of the use and distribution of ActiveState Komodo, the License Key (as
+hereinafter defined) and other applicable software (collectively the
+"Software").
+
+1. License Grant.
+Subject to the terms and conditions of this License, ActiveState grants to you a
+personal, non-exclusive, non-transferable, and limited license to use the
+Software solely to create, compile, test and deploy, in source or object code
+form, your own application programs ("Works"). You may create redistributable
+applications based on your unique development work using the Software and you
+may sublicense to end users of such Works ("End Users") the personal,
+non-exclusive, non-transferable right to install and execute the files, and/or
+libraries that are necessary to use the Works created using the Software. Use of
+such files and/or libraries by such End Users is limited to runtime purposes
+only. You may not provide any End User with access to the development or
+interactive capabilities of the Software libraries or technology, nor may you
+expose the base programming language(s) as a scripting language within the Works
+to any such End User. When you pay the license fee established by ActiveState,
+you will receive a license key (the "License Key") from ActiveState that
+authorizes you to use the Software only in the following specific contexts.
+
+  a. Commercial Use. If your License Key authorizes Commercial Use, you may use
+  the software on more than one computer or on a network so long as you are the
+  sole user of the Software. (A "network" is any combination of two or more
+  computers that are electronically linked and capable of sharing the use of a
+  single software program.) You will obtain a separate license for each
+  additional user of the Software (whether or not such users are connected on a
+  network). You are not permitted to sell, lease, distribute, transfer,
+  sublicense, or otherwise dispose of the Software, in whole or in part, for any
+  form of actual or potential commercial gain or consideration.
+
+  b. Evaluation (Trial) Use. If your License Key authorizes Evaluation (Trial)
+  Use, you may use the software only for evaluation purposes without payment of
+  the License Fee for a period of no more than twenty-one (21) days from the
+  date of download.
+
+  c. Non-commercial Use. If your License Key authorizes Non-commercial Use, you
+  may use the software in a teaching or learning environment only. You are not
+  permitted to sell, lease, distribute, transfer, sublicense, or otherwise
+  dispose of the Software, in whole or in part, for any form of actual or
+  potential commercial gain or consideration.
+
+  d. Application Service Provision. Any use of the Software in conjunction with
+  ActiveState web services and any updates to such services which may be
+  provided by ActiveState from time to time (the "Service"). ActiveState hereby
+  grants to Licensee only the non-exclusive right and license to access, use,
+  and transmit Licensee data with the Service. Licensee shall access the Service
+  only with procedures communicated by ActiveState and use the Service only for
+  Licensee's internal business operations including affiliated entities that
+  control, or are controlled by, Licensee, and Licensee shall not permit the
+  Service to be used by or for the benefit of third parties. Licensee shall not
+  have the right to sublicense or sell rights to access or use the Service or to
+  transfer or assign rights to access or use the Service, except as expressly
+  provided herein. All rights not expressly granted to Licensee herein are
+  expressly reserved by ActiveState.
+
+  e. Other Use. Any use of the software other than the uses specified above
+  requires a separate license from ActiveState and the payment of additional
+  license fees as determined by ActiveState. Such additional redistribution
+  options are available, at ActiveState's sole discretion, on a case-by-case
+  basis. Contact Sales@ActiveState.com to discuss any redistribution options
+  not covered by this license agreement. ActiveState reserves all rights not
+  expressly granted to you herein.
+
+  f. Student License. Student Edition Software means full versions of
+  ActiveState Software, offered with special pricing and license terms, and only
+  available to Qualified Student Users.
+
+    1. Student Edition Special License Terms. Student Edition Software is not
+    transferable. Student software is not version upgradeable. Commercial use is
+    permitted only if the User is: a Qualified Student User at the time of
+    purchasing the Software, a Qualified Student User at the time of development
+    of Works and a Qualified Student User at the time of sublicensing of the
+    Works.
+
+    2. Please refer to the ActiveState student license requirements or contact
+    ActiveState for further information on what is a "Qualified Student User,"
+    and about other licensing options that may be available.
+
+  g. Personal Edition License. Personal Edition Software means full version of
+  ActiveState Software offered with special pricing. License terms and
+  restrictions are as follows:
+
+    1. Personal Edition License Terms. Software is not transferable to another
+    owner. Software is only for natural persons who are purchasing the Personal
+    Edition License using their own funds. Notwithstanding anything to the
+    contrary set forth above, You may not use the Software, and this license
+    shall not be in effect, in the event that You do not pay the Software
+    license fee using your own funds. If any third party pays the Software
+    license fee or if you expect or receive reimbursement for the Software
+    license fee from any third party, this Personal Edition License shall be
+    invalid and not in effect. You cannot purchase more than one Personal
+    Edition License (no bulk purchases).
+
+    2. Please refer to the ActiveState Komodo Personal License requirements or
+    contact ActiveState for further information on what is a "Personal Edition
+    License," and about other licensing options that may be available.
+
+2. Termination.
+This License Agreement is effective until terminated. ActiveState may terminate
+this License immediately and without prior notice if you breach any term of this
+License or for any other commercially reasonable ground. In the event of any
+termination or expiration, you agree to immediately destroy and/or erase the
+original and all copies of the Software, any accompanying documentation and
+License Keys and to discontinue their use and you will not retain or store the
+Software or any copies thereof, in any form or medium.
+
+3. Proprietary Rights.
+The Software is licensed, not sold, to you. ActiveState reserves all rights not
+expressly granted to you. Ownership of the Software and its associated
+proprietary rights, including but not limited to patent and patent applications,
+are retained by ActiveState. The Software is protected by the copyright laws of
+Canada and the United States and by international treaties. Therefore, you must
+comply with such laws and treaties in your use of the Software. You agree not to
+remove any of ActiveState's copyright, trademarks and other proprietary notices
+from the Software.
+
+4. Distribution.
+Except as may be expressly allowed in Section 1, or as otherwise agreed to in a
+written agreement signed by both you and ActiveState, you will not distribute
+the Software, either in whole or in part, in any form or medium.
+
+5. Transfer and Use Restrictions.
+You may not sell, license, sub-license, lend, lease, rent, share, assign,
+transmit, telecommunicate, export, distribute or otherwise transfer the Software
+to others, except as expressly permitted in this License Agreement or in another
+agreement with ActiveState. In order to use the Software you will be required to
+obtain a License Key and agree to this License Agreement for the use of the
+Software. You will not disclose or provide access to your License Key to any
+other person or entity. You must comply with all applicable Canadian and other
+export control laws in your use of the Software. Except as may be expressly
+permitted above, you may not modify, reverse engineer, decompile, decrypt,
+extract or otherwise disassemble the Software.
+
+6. NO WARRANTY.
+ACTIVESTATE MAKES NO WARRANTIES WHATSOEVER REGARDING THE SOFTWARE AND IN
+PARTICULAR, DOES NOT WARRANT THAT THE SOFTWARE WILL FUNCTION IN ACCORDANCE WITH
+THE ACCOMPANYING DOCUMENTATION IN EVERY COMBINATION OF HARDWARE PLATFORM OR
+SOFTWARE ENVIRONMENT OR CONFIGURATION, OR BE COMPATIBLE WITH EVERY COMPUTER
+SYSTEM. IF THE SOFTWARE IS DEFECTIVE FOR ANY REASON, YOU WILL ASSUME THE ENTIRE
+COST OF ALL NECESSARY REPAIRS OR REPLACEMENTS. FURTHER, LICENSEE ACKNOWLEDGES
+AND AGREES THAT THE INTERNET IS NOT ESTABLISHED OR MAINTAINED BY ACTIVESTATE,
+THAT ACTIVESTATE HAS NO CONTROL OVER THE INTERNET, AND THAT ACTIVESTATE IS NOT
+LIABLE FOR THE DISCONTINUANCE OF OPERATION OF ANY PORTION OF THE INTERNET OR
+POSSIBLE REGULATION OF THE INTERNET WHICH MIGHT RESTRICT OR PROHIBIT THE
+OPERATION OF THE SERVICE.
+
+7. DISCLAIMER.
+ACTIVESTATE DOES NOT WARRANT THAT THE SOFTWARE OR SERVICE IS FREE FROM BUGS,
+DEFECTS, ERRORS OR OMISSIONS. THE SOFTWARE OR SERVICE IS PROVIDED ON AN "AS IS"
+BASIS AND ACTIVESTATE MAKES NO OTHER WARRANTIES OR CONDITIONS, EXPRESS OR
+IMPLIED, WITH RESPECT TO THE SOFTWARE OR SERVICE OR ANY ACCOMPANYING ITEMS
+INCLUDING WITHOUT LIMITATION THE IMPLIED WARRANTIES OR CONDITIONS OF
+MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. SOME JURISDICTIONS DO NOT
+ALLOW THE EXCLUSION OF IMPLIED WARRANTIES, IN WHICH CASE THE ABOVE EXCLUSIONS
+MAY NOT APPLY TO YOU.
+
+8. LIMITATION OF LIABILITY.
+ACTIVESTATE WILL HAVE NO LIABILITY OR OBLIGATION FOR ANY DAMAGES OR REMEDIES,
+INCLUDING, WITHOUT LIMITATION, THE COST OF SUBSTITUTE GOODS, LOST DATA, LOST
+PROFITS, LOST REVENUES OR ANY OTHER DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+GENERAL, PUNITIVE OR CONSEQUENTIAL DAMAGES, ARISING OUT OF THIS LICENSE OR THE
+USE OR INABILITY TO USE THE SOFTWARE OR SERVICE. IN NO EVENT WILL ACTIVESTATE'S
+TOTAL AGGREGATE LIABILITY (WHETHER IN CONTRACT (INCLUDING FUNDAMENTAL BREACH),
+WARRANTY, TORT (INCLUDING NEGLIGENCE), PRODUCT LIABILITY, INTELLECTUAL PROPERTY
+INFRINGEMENT OR OTHER LEGAL THEORY) WITH REGARD TO THE SOFTWARE AND/OR THIS
+LICENSE EXCEED THE LICENSE FEE PAID BY YOU TO ACTIVESTATE. FURTHER, ACTIVESTATE
+WILL NOT BE LIABLE FOR ANY DELAY OR FAILURE TO PERFORM ITS OBLIGATIONS UNDER
+THIS LICENSE AS A RESULT OF ANY CAUSES OR CONDITIONS BEYOND ACTIVESTATE'S
+REASONABLE CONTROL.
+
+9. U.S. Government Restricted Rights Legend.
+If the Software is acquired by any agency or other part of the U.S. government
+in a transaction subject to the Federal Acquisition Regulations or the Defense
+Federal Acquisition Regulations, the Software is furnished with Restricted
+Rights. Use, duplication, or disclosure of the Software by the U.S. government
+is subject to all applicable restrictions set forth in such Regulations, as
+amended from time to time, including subparagraphs (c)(1) and (2) of the
+Commercial Computer Software - Restricted Rights clause at Section 48 C.F.R.
+52.227-19.
+
+10. Application Server Operations.
+During the term hereof and subject to the terms and conditions hereof,
+ActiveState shall undertake commercially reasonable efforts to provide Licensee
+with consistent Service (i) insulated from changes in the Internet, and (ii)
+sufficient for access twenty-four (24) hours per day, seven (7) days per week
+("24 x 7"), except for routine maintenance. However, ActiveState, does not
+promise, guarantee, or warrant a 24 x 7 Service but ActiveState shall undertake
+commercially reasonable efforts during its normal business hours to restore
+promptly all failures of service at no additional charge to Licensee. Licensee
+shall be solely responsible at its expense, for: (i) internal network, hardware,
+software, and supported browsers sufficient to access the Service, and (ii)
+broadband Internet connections. A Licensee that requires a guaranteed 24 x7
+Service should contact ActiveState Sales@ActiveState.com to discuss upgrading
+the License.
+
+11. Ownership.
+Title to the Proprietary Rights embodied in the software that generates the
+Service and other software installed on ActiveState's Application Server or
+operating as part of ActiveState's web site shall remain in and be the sole and
+exclusive property of ActiveState and its licensors. Licensee shall not alter,
+change or remove any proprietary notices or confidentiality legends placed on or
+contained within ActiveState's Application Server operating as part of
+ActiveState's web site, the Service, or any other software installed on
+ActiveState's Application Server.
+
+12. Confidentiality of Software Installed on ActiveState's Application Server.
+Licensee acknowledges ActiveState's claim that the software installed on
+ActiveState's Application Server embodies logic, design, and coding methodology
+which constitute valuable confidential information that is proprietary to
+ActiveState and its licensors. Licensee shall safeguard the right to access the
+Service using the same standard of care which Licensee uses for its similar
+confidential materials, but in no event less than reasonable care.
+
+13. Confidentiality of Licensee Data.
+All Licensee Data and/or information disclosed to ActiveState in connection with
+the performance of this Agreement ("Licensee Confidential Information") shall be
+held as confidential by ActiveState and shall not, without the prior written
+consent of Licensee, be disclosed or be used for any purposes other than the
+performance of this Agreement. ActiveState shall safeguard the confidentiality
+of such Licensee Confidential Information using the same standard of care which
+ActiveState uses for its similar confidential materials, but in no event less
+than reasonable care. Notwithstanding the forgoing, the term "Licensee
+Confidential Information" shall not be deemed to include information which: (i)
+is now, or hereafter becomes, through no act or failure to act on the part of
+ActiveState, generally known or available; (ii) is known by ActiveState at the
+time of receiving such information as evidenced by its written records; (iii) is
+hereafter furnished to ActiveState by a third party, as a matter of right and
+without restriction on disclosure; (iv) is independently developed by
+ActiveState as evidenced by its written and dated records and without any breach
+of this Agreement; or (v) is the subject of a written permission to disclose
+provided by Licensee. Further notwithstanding the forgoing, disclosure of
+Licensee Confidential Information shall not be precluded if such disclosure: (i)
+is in response to a valid order of a court or other governmental body of Canada
+or the United States; (ii) is otherwise required by law; or (iii) is otherwise
+necessary to establish rights or enforce obligations under this Agreement, but
+only to the extent that any such disclosure is necessary.
+
+14. Entire Agreement.
+This License and the Usage License Agreement constitutes the entire agreement
+between you and ActiveState regarding the Software and all accompanying
+documentation. If any provision is found to be invalid by a court of competent
+jurisdiction, the balance of the provisions will remain in full force and
+effect. This License will be governed by and construed in accordance with the
+laws of the Province of British Columbia, Canada, excluding its conflict of laws
+rules. The parties hereby attorn to the jurisdiction of the courts of the
+Province of British Columbia in the event of any dispute hereunder. The
+provisions of the U.N. Convention on Contracts For The International Sale of
+Goods (1980) and any successor Convention, will not apply to this License.
+
+15. Inurement.
+The rights, restrictions, limitations, disclaimers and remedies granted to,
+retained by, or for the benefit of ActiveState will inure to the benefit of and
+will be enforceable by ActiveState and its licensors, successors and assigns.
+You may not assign your rights, obligations and interest in and to this License
+without the prior written consent of ActiveState. The obligations, covenants and
+rights which apply to you will inure to your benefit and will be binding on you
+and your permitted successors and assigns.
+
+BY INSTALLING THE SOFTWARE, OR, WHERE APPLICABLE, CHOOSING THE "I ACCEPT..."
+OPTION, YOU INDICATE THAT YOU HAVE READ, UNDERSTOOD AND ACCEPT THE TERMS AND
+CONDITIONS OF THE LICENSE. IF YOU DO NOT AGREE WITH THE TERMS AND CONDITIONS,
+YOU SHOULD NOT ATTEMPT TO INSTALL THE SOFTWARE.
