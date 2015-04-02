@@ -29,4 +29,3 @@ Upload a file to a hashserv node:
     POST /api/upload
     Parameters:
     - file
-
