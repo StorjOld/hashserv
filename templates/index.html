@@ -17,14 +17,28 @@
 			</form>
 		</div>
 
-		<div class="header" style="margin-top: 100px;">
+		<div style="margin-top: 100px;">
 			<h3 class="text-muted">Files on Disk</h3>
-			<hr/>
-			<ul>
-			{% for hash in files %}
-			  <li><a href="api/download/{{ hash }}">{{ hash }}</a></li>
-			{% endfor %}
-			</ul>
+			<hr/>          
+			<table class="table">
+				<thead>
+					<tr>
+					<th>Hash</th>
+					<th>Audit</th>
+					<th>Last Audit</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for hash in files %}
+					<tr>
+						<td><a href="api/download/{{ hash }}">{{ hash }}</a></td>
+						<td>87a3571d21cb7f8dbf8f3cf</td>
+						<td>2 block(s) ago - #350400</td>
+					</tr>
+					{% endfor %}
+					<tr>
+				</tbody>
+			</table>
 		</div>
 
 	</div>

@@ -29,3 +29,15 @@ Upload a file to a hashserv node:
     POST /api/upload
     Parameters:
     - file
+
+Download a file from a hashserv node:
+	
+	GET /api/download/<filehash>
+    Parameters:
+	- filehash
+
+Serve a file from a hashserv node:
+
+	GET /api/server/<filehash>/<file_extension>
+    Parameters:
+	- filehash, file_extension
