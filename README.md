@@ -2,7 +2,7 @@
 Trustless and cryptographically audited public file server. Built on top of some of the work done on [MetaDisk](http://metadisk.org) and [DriveShare](http://driveshare.org) as part of the [Storj Project](http://storj.io).
 
 ## Install
-Coded and tested on the Python 3.4, see below for any depecencies:
+Coded and tested on the Python 3.4, see below for any dependencies:
 
 	pip install Flask
 
