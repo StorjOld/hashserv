@@ -17,6 +17,12 @@ app.config['PROCESS_FOLDER'] = 'process/'
 file_exts = ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', '.shard']
 app.config['ALLOWED_EXTENSIONS'] = set(file_exts)
 
+def setup():
+	"""Setup the proper data store directories."""
+	if not os.path.exists(app.config['DATA_FOLDER']):
+		os.makedirs(app.config['DATA_FOLDER'])
+	if not os.path.exists(app.config['PROCESS_FOLDER']):
+		os.makedirs(app.config['PROCESS_FOLDER'])
 
 def allowed_file(filename):
 	"""For a given file, return whether it's an allowed type or not."""
@@ -72,7 +78,7 @@ def upload():
 			file_hash = get_hash(process_filepath)
 			hash_filepath = os.path.join(app.config['DATA_FOLDER'], file_hash)
 
-			# Move the file from processing to data
+			# Copy the file from processing to data
 			os.rename(process_filepath, hash_filepath)
 
 			# Returns the file hash
@@ -108,6 +114,7 @@ def serve_file(filehash, extentsion):
 
 
 if __name__ == '__main__':
+	setup()
 	app.run(
 		host="0.0.0.0",
 		port=int("5000"),
