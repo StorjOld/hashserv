@@ -24,6 +24,7 @@ def setup():
 	if not os.path.exists(app.config['PROCESS_FOLDER']):
 		os.makedirs(app.config['PROCESS_FOLDER'])
 
+
 def allowed_file(filename):
 	"""For a given file, return whether it's an allowed type or not."""
 	return '.' in filename and \
@@ -108,13 +109,15 @@ def serve_file(filehash, extentsion):
 	except KeyError:
 		return "415 Unsupported Media Type."
 
-
 	return send_from_directory(app.config['DATA_FOLDER'], filehash,
 		mimetype=mapped_mimetype)
 
 
 if __name__ == '__main__':
+	# Make sure process and data directories are created
 	setup()
+	
+	# Run the Flask app
 	app.run(
 		host="0.0.0.0",
 		port=int("5000"),
