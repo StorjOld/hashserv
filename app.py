@@ -101,11 +101,11 @@ def download_file(filehash):
 		as_attachment=True)
 
 @app.route('/api/serve/<filehash>/<extension>')
-def serve_file(filehash, extentsion):
-	# find mimtype from passed extentsion
+def serve_file(filehash, extension):
+	# find mimtype from passed extension
 	try:
 		mimetypes.init()
-		mapped_mimetype = mimetypes.types_map["." + extentsion]
+		mapped_mimetype = mimetypes.types_map["." + extension]
 	except KeyError:
 		return "415 Unsupported Media Type."
 
