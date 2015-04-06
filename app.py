@@ -100,12 +100,12 @@ def download_file(filehash):
 	return send_from_directory(app.config['DATA_FOLDER'], filehash,
 		as_attachment=True)
 
-@app.route('/api/serve/<filehash>/<extentsion>')
-def serve_file(filehash, extentsion):
-	# find mimtype from passed extentsion
+@app.route('/api/serve/<filehash>/<extension>')
+def serve_file(filehash, extension):
+	# find mimtype from passed extension
 	try:
 		mimetypes.init()
-		mapped_mimetype = mimetypes.types_map["." + extentsion]
+		mapped_mimetype = mimetypes.types_map["." + extension]
 	except KeyError:
 		return "415 Unsupported Media Type."
 
