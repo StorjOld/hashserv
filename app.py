@@ -6,6 +6,8 @@ from flask import Flask, render_template, request, redirect
 from flask import url_for, send_from_directory, abort
 from werkzeug import secure_filename
 
+from NewFile import NewFile
+
 # Initialize the Flask application
 app = Flask(__name__)
 
@@ -41,15 +43,6 @@ def files_in_cache():
 		new_cache_files.append(filelist[len(filelist)-1])
 	return new_cache_files
 
-def get_hash(filepath):
-	"""Get the sha256 hash of the passed file."""
-	hasher = hashlib.sha256()
-	with open(filepath, 'rb') as afile:
-		buf = afile.read()
-		hasher.update(buf)
-	return hasher.hexdigest()
-
-
 # This route will show a form to perform an AJAX request
 # jQuery is loaded to execute the request and update the
 # value of the operation.
@@ -75,12 +68,8 @@ def upload():
 				filename)
 			file.save(process_filepath)
 
-			# Find the hash of the data
-			file_hash = get_hash(process_filepath)
-			hash_filepath = os.path.join(app.config['DATA_FOLDER'], file_hash)
-
-			# Copy the file from processing to data
-			os.rename(process_filepath, hash_filepath)
+			new_file = NewFile(process_filepath)
+			new_file.process(app.config['DATA_FOLDER'])
 
 			# Returns the file hash
 			return redirect(url_for('index'))
