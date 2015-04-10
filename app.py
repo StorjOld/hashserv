@@ -2,9 +2,9 @@ import os
 import glob
 import hashlib
 import mimetypes
-from flask import Flask, render_template, request, redirect
-from flask import url_for, send_from_directory, abort
 from werkzeug import secure_filename
+from flask import url_for, send_from_directory, abort
+from flask import Flask, render_template, request, redirect
 
 from NewFile import NewFile
 
@@ -15,9 +15,6 @@ app = Flask(__name__)
 app.config['DATA_FOLDER'] = 'data/'
 # This is the path to the processing directory
 app.config['PROCESS_FOLDER'] = 'process/'
-# These are the extension that we are accepting to be uploaded
-file_exts = ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', '.shard']
-app.config['ALLOWED_EXTENSIONS'] = set(file_exts)
 
 def setup():
 	"""Setup the proper data store directories."""
@@ -25,12 +22,6 @@ def setup():
 		os.makedirs(app.config['DATA_FOLDER'])
 	if not os.path.exists(app.config['PROCESS_FOLDER']):
 		os.makedirs(app.config['PROCESS_FOLDER'])
-
-
-def allowed_file(filename):
-	"""For a given file, return whether it's an allowed type or not."""
-	return '.' in filename and \
-		filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
 
 def files_in_cache():
 	"""Returns a list of files in the hashserv cache."""
@@ -58,7 +49,7 @@ def upload():
 	file = request.files['file']
 
 	# Check if the file is one of the allowed types/extensions
-	if file and allowed_file(file.filename):
+	if file:
 		# Make the filename safe, remove unsupported chars
 		filename = secure_filename(file.filename)
 
@@ -68,6 +59,7 @@ def upload():
 				filename)
 			file.save(process_filepath)
 
+			# NewFile object will do processing 
 			new_file = NewFile(process_filepath)
 			new_file.process(app.config['DATA_FOLDER'])
 

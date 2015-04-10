@@ -1,4 +1,5 @@
 import os
+import shutil
 import hashlib
 
 class NewFile:
@@ -26,7 +27,7 @@ class NewFile:
 
 			# Move the file from processing to data
 			if not self.debug:
-				os.rename(self.filepath, data_path)
+				shutil.move(self.filepath, data_path)
 
 			# Update the new filepath
 			self.filepath = data_path
@@ -41,17 +42,16 @@ class NewFile:
 		raise NotImplemented
 
 if __name__ == "__main__":
-	# create new file obj
+	# Create new file obj
 	newfile = NewFile('testing/random.txt', True)
 	newfile2 = NewFile('testing/nothere.txt', True)	
 
-	# testing success
+	# Testing success
 	ch = '969a5145d8b6ed3228e493fb7a66d07d3253be89af6094cf510986ebcd7d2fbd'
 	newfile.process('testing/')
 	assert(newfile.processed)
 	assert(newfile.hash == ch)
 
-	# testing fail
+	# Testing fail
 	newfile2.process('testing/')
 	assert(not newfile2.processed)
-	
