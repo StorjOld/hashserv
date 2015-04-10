@@ -6,3 +6,7 @@ python:
 install: pip install Flask
 # command to run tests, e.g. python setup.py test
 script:  python -m unittest testing.py
+
+# post to slack
+notifications:
+  slack: storjcommunity:TZfUO9ycY8R9UYwztWZTo0jk
