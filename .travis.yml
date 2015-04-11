@@ -4,8 +4,8 @@ python:
 
 # command to install dependencies, e.g. pip install -r requirements.txt 
 install: 
-	- pip install Flask
-	- pip install coveralls
+  - pip install Flask
+  - pip install coveralls
 
 # command to run tests, e.g. python setup.py test
 script:  
