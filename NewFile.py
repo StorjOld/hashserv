@@ -40,18 +40,3 @@ class NewFile:
 	def to_db(self):
 		"""Insert file info into the database."""
 		raise NotImplemented
-
-if __name__ == "__main__":
-	# Create new file obj
-	newfile = NewFile('testing/random.txt', True)
-	newfile2 = NewFile('testing/nothere.txt', True)	
-
-	# Testing success
-	ch = '969a5145d8b6ed3228e493fb7a66d07d3253be89af6094cf510986ebcd7d2fbd'
-	newfile.process('testing/')
-	assert(newfile.processed)
-	assert(newfile.hash == ch)
-
-	# Testing fail
-	newfile2.process('testing/')
-	assert(not newfile2.processed)
