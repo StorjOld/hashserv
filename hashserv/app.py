@@ -16,6 +16,10 @@ app.config['DATA_FOLDER'] = 'data/'
 # This is the path to the processing directory
 app.config['PROCESS_FOLDER'] = 'process/'
 
+# Node storage and bandwidth limits
+app.config['STORAGE_LIMIT'] = 0
+app.config['BANDWIDTH_LIMIT'] = 0
+
 def setup():
 	"""Setup the proper data store directories."""
 	if not os.path.exists(app.config['DATA_FOLDER']):

@@ -8,6 +8,7 @@ class NewFile:
 		self.hash = None
 		self.processed = False
 		self.debug = debug
+		self.size = 0
 
 	def get_hash(self):
 		"""Get the SHA256 hash of the file."""
@@ -24,6 +25,9 @@ class NewFile:
 
 			# Generate path and filename for data folder
 			data_path = os.path.join(data_folder, self.hash)
+
+			# Get size of the file
+			self.size = os.path.getsize(self.filepath)
 
 			# Move the file from processing to data
 			if not self.debug:
