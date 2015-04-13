@@ -29,14 +29,21 @@
 				<thead>
 					<tr>
 					<th>Hash</th>
+					<th>Download</th>
 					<th>Receipt</th>
 					</tr>
 				</thead>
 				<tbody>
 					{% for hash in files %}
 					<tr>
-						<td><a href="api/download/{{ hash }}">{{ hash }}</a></td>
-						<td><a href="#">View Receipt</a></td>
+						<td>
+							<a href="api/download/{{ hash }}">{{ hash }}</a>
+						</td>
+						<td>
+							<a href="api/download/{{ hash }}">
+								Download File</a>
+						</td>
+						<td><a href="#">In Queue</a></td>
 					</tr>
 					{% endfor %}
 					<tr>

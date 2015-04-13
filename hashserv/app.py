@@ -7,6 +7,7 @@ from flask import url_for, send_from_directory, abort
 from flask import Flask, render_template, request, redirect
 
 from NewFile import NewFile
+from DataFile import DataFile
 
 # Initialize the Flask application
 app = Flask(__name__)
@@ -82,20 +83,15 @@ def upload():
 # an image, that image is going to be show after the upload
 @app.route('/api/download/<filehash>')
 def download_file(filehash):
-	return send_from_directory(app.config['DATA_FOLDER'], filehash,
+	data = DataFile(filehash)
+	return send_from_directory(app.config['DATA_FOLDER'],  data.get_hash(),
 		as_attachment=True)
 
 @app.route('/api/serve/<filehash>/<extension>')
 def serve_file(filehash, extension):
-	# find mimtype from passed extension
-	try:
-		mimetypes.init()
-		mapped_mimetype = mimetypes.types_map["." + extension]
-	except KeyError:
-		return "415 Unsupported Media Type."
-
-	return send_from_directory(app.config['DATA_FOLDER'], filehash,
-		mimetype=mapped_mimetype)
+	data = DataFile(filehash)
+	return send_from_directory(app.config['DATA_FOLDER'], data.get_hash(),
+		mimetype=data.find_ext(extension))
 
 
 if __name__ == '__main__':
