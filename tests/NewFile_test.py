@@ -1,5 +1,5 @@
 import unittest
-from NewFile import NewFile
+from hashserv.NewFile import NewFile
 
 class TestNewFile(unittest.TestCase):
 
