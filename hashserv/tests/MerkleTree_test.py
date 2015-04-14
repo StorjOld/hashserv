@@ -1,5 +1,5 @@
 import unittest
-from hashserv import MerkleTree
+from ..hashserv.MerkleTree import MerkleTree
 
 class HashTests(unittest.TestCase):
 
