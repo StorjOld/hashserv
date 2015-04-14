@@ -13,3 +13,4 @@ script:
 # post to slack
 notifications:
   slack: storjcommunity:TZfUO9ycY8R9UYwztWZTo0jk
+  email: false
