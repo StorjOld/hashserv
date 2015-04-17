@@ -1,7 +1,7 @@
 import unittest
-from ..hashserv.NewFile import NewFile
+from hashserv.NewFile import NewFile
 
-class TestNewFile(unittest.TestCase):
+class NewFile_Test(unittest.TestCase):
 
 	def test_success(self):
 		newfile = NewFile('testing/random.txt', True)

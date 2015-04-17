@@ -8,7 +8,7 @@ install:
 
 # command to run tests, e.g. python setup.py test
 script:  
-  - python -m unittest discover -p '*_test.py'
+  - python -m unittest discover -p '*_Test.py'
 
 # post to slack
 notifications:

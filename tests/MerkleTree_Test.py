@@ -1,7 +1,7 @@
 import unittest
-from ..hashserv.MerkleTree import MerkleTree
+from hashserv.MerkleTree import MerkleTree
 
-class HashTests(unittest.TestCase):
+class MerkleTree_Test(unittest.TestCase):
 
 	def test_two_even_items(self):
 		tree = MerkleTree()
