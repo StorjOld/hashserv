@@ -3,6 +3,12 @@ from hashserv.MerkleTree import MerkleTree
 
 class MerkleTree_Test(unittest.TestCase):
 
+	def test_simple_sha256(self):
+		tree = MerkleTree()
+		result = tree.sha256("test")
+		ans = '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08'
+		self.assertEqual(result, ans)
+
 	def test_two_even_items(self):
 		tree = MerkleTree()
 		tree.add_content("test")
@@ -31,5 +37,5 @@ class MerkleTree_Test(unittest.TestCase):
 		self.assertEqual(proof[1][0], ans)
 
 if __name__ == '__main__':
-	suite = unittest.TestLoader().loadTestsFromTestCase(HashTests)
+	suite = unittest.TestLoader().loadTestsFromTestCase(MerkleTree_Test)
 	unittest.TextTestRunner(verbosity=2).run(suite)
