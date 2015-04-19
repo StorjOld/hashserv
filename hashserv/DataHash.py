@@ -28,9 +28,20 @@ class DataHash:
 		# Connect
 		g.db = connect_db()
 
-		# Do Query
-		query = "insert into hash_table (hash, block) values (?, ?)"
-		g.db.execute(query, (self.ahash, 1,))
-		g.db.commit()
+		# Check for duplicates
+		
+		block_num = self.check_db()
+		if block_num == None:
+			query = "insert into hash_table (hash, block) values (?, ?)"
+			g.db.execute(query, (self.ahash, 1,))
+			g.db.commit()
+			return "1"
+		else:
+			return block_num[2]
 
-		return "0"
+	def check_db(self):
+		"""Make sure there is no duplicate hash."""
+		# Find duplicate
+		query = "SELECT * FROM hash_table WHERE hash=?"
+		cur = g.db.execute(query, (self.ahash,))
+		return cur.fetchone()

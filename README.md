@@ -11,10 +11,18 @@ Instead we can take that data and put it in a [Merkle tree](https://en.wikipedia
 **tldr;** A federated server for building blockchain notarized Merkle trees. 
 
 # API
-Add a hash to the queue for the next block. Will return the block number that the data will be inserted into.
+Add a hash to the queue for the next block. Returns the block number that the data will be inserted into.
 
 	GET /api/submit/<sha256_hash>
 	Parameters:
 	- sha256_hash
 	Returns:
 	- block_num
+
+Returns the content of a particular block.
+
+	GET /api/block/<block_num>
+		Parameters:
+		- block_num
+		Returns:
+		- Block data
