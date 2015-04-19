@@ -8,4 +8,6 @@ Basically we want to prove some data existed at a certain point and time, we cal
 
 Instead we can take that data and put it in a [Merkle tree](https://en.wikipedia.org/wiki/Merkle_tree), and insert the Merkle root into the Bitcoin blockchain. In this case we only have to do one transaction, but still can do Proof of Existence for all items in the Merkle tree. 
 
-tldr; A federated server for building blockchain notarized Merkle trees. 
+**tldr;** A federated server for building blockchain notarized Merkle trees. 
+
+# API
