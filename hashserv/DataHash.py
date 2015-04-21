@@ -1,5 +1,4 @@
 import sqlite3
-
 from flask import Flask, g
 
 
@@ -32,10 +31,11 @@ class DataHash:
         g.db = connect_db()
 
         # Check for duplicates
-
         block_num = self.check_db()
+
+        # If not duplicates then insert
         if block_num is None:
-            query = "insert into hash_table (hash, block) values (?, ?)"
+            query = "INSERT INTO hash_table (hash, block) VALUES (?, ?)"
             g.db.execute(query, (self.ahash, 1,))
             g.db.commit()
             return "1"
@@ -44,7 +44,6 @@ class DataHash:
 
     def check_db(self):
         """Make sure there is no duplicate hash."""
-        # Find duplicate
         query = "SELECT * FROM hash_table WHERE hash=?"
         cur = g.db.execute(query, (self.ahash,))
         return cur.fetchone()
