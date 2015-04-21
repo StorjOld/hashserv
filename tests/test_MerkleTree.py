@@ -5,7 +5,7 @@ from hashserv.MerkleTree import MerkleBranch
 from hashserv.MerkleTree import MerkleProof
 
 
-class MerkleTree_Test(unittest.TestCase):
+class MerkleTreeTest(unittest.TestCase):
 
     def test_simple_sha256(self):
         tree = MerkleTree()

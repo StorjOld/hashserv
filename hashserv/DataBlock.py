@@ -1,7 +1,7 @@
 import sqlite3
-
 from flask import Flask, g
 
+# Application imports
 from hashserv.MerkleTree import MerkleTree
 
 

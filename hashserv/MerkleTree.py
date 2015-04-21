@@ -48,6 +48,7 @@ class MerkleProof:
 
         return True
 
+
 class MerkleTree:
     def __init__(self, hash_f=sha256):
         """Simplistic Merkle tree. Defaults to sha256."""
