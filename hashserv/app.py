@@ -27,6 +27,8 @@ def submit(sha256_hash):
 def show_block(block_num):
     """Shows the metadata for a particular block."""
     block = DataBlock(block_num)
+    block.find_leaves()
+    block.close()
     return jsonify(block.to_json())
 
 

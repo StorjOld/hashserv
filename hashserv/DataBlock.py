@@ -25,6 +25,7 @@ class DataBlock:
         self.tx_id = None
 
     def close(self):
+        """Close block, and generate Merkle root."""
         self.closed = True
 
     def find_leaves(self):
@@ -36,7 +37,11 @@ class DataBlock:
         cur = g.db.execute(query, (self.block_num,))
 
         for row in cur.fetchall():
-            self.merkle_tree.add_hash(row[1])
+            self.add_hash(row[1])
+
+    def add_hash(self, ahash):
+        """As long as its not closed add hash."""
+        self.merkle_tree.add_hash(ahash)
 
     def merkle_root(self):
         """Find the data Merkle root."""
@@ -44,14 +49,17 @@ class DataBlock:
             return self.merkle_tree.merkle_root()
 
     def to_json(self):
-        self.find_leaves()
-
+        """For the API."""
         block_data = {
             'block_num': self.block_num,
-            'closed': False,
+            'closed': self.closed,
             'merkle_root': self.merkle_root(),
             'tx_id': self.tx_id,
             'leaves': self.merkle_tree.leaves
         }
 
         return block_data
+
+    def generate(self):
+        """Generate the block and insert into the database."""
+        pass
