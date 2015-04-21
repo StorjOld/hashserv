@@ -14,10 +14,10 @@ Instead we can take that data and put it in a [Merkle tree](https://en.wikipedia
 Add a hash to the queue for the next block. Returns the block number that the data will be inserted into.
 
 	GET /api/submit/<sha256_hash>
-	Parameters:
-	- sha256_hash
-	Returns:
-	- block_num
+        Parameters:
+        - sha256_hash
+        Returns:
+        - block_num
 
 Returns the content of a particular block.
 

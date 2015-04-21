@@ -19,13 +19,34 @@ class MerkleBranch:
         """Get the parent of the branch."""
         return self.hash_f(self.left + self.right)
 
+    def contains(self, target):
+        return self.left == target or self.right == target
+
 
 class MerkleProof:
-    def __init__(self, target, hash_f=sha256):
+    def __init__(self, hash_f=sha256):
         """Build a Merkle proof."""
-        self.target = target
         self.hash_f = hash_f
+        self.branches = []
 
+    def add(self, branch):
+        """Add a branch to the proof."""
+        self.branches.append(branch)
+
+    def is_valid(self, target):
+        """Check if the target hash is in the proof."""
+
+        # We assume that the leaf is contained in the
+        # first branch of the proof, so then we check
+        # if the parent is contained in each higher
+        # branch.
+        new_target = target
+        for branch in self.branches:
+            if not branch.contains(new_target):
+                return False
+            new_target = branch.get_parent()
+
+        return True
 
 class MerkleTree:
     def __init__(self, hash_f=sha256):

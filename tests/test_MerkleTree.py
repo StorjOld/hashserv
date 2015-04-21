@@ -1,5 +1,8 @@
 import unittest
+from hashserv.MerkleTree import sha256
 from hashserv.MerkleTree import MerkleTree
+from hashserv.MerkleTree import MerkleBranch
+from hashserv.MerkleTree import MerkleProof
 
 
 class MerkleTree_Test(unittest.TestCase):
@@ -36,3 +39,31 @@ class MerkleTree_Test(unittest.TestCase):
         target = tree.hash_f("test3")
         proof = tree.merkle_proof(target)
         self.assertEqual(proof[1].get_parent(), ans)
+
+    def test_merkle_branch(self):
+        left = sha256("test")
+        right = sha256("test2")
+        branch = MerkleBranch(left, right)
+
+        ans = '694299f8eb01a328732fb21f4163fbfaa8f60d5662f04f52ad33bec63953ec7f'
+        self.assertEqual(branch.get_parent(), ans)
+
+    def test_merkle_proof_simple_true(self):
+        left = sha256("test")
+        right = sha256("test2")
+        branch = MerkleBranch(left, right)
+
+        target = left
+        proof = MerkleProof()
+        proof.add(branch)
+        self.assertTrue(proof.is_valid(target))
+
+    def test_merkle_proof_simple_false(self):
+        left = sha256("test")
+        right = sha256("test2")
+        branch = MerkleBranch(left, right)
+
+        target = sha256("notinproof")
+        proof = MerkleProof()
+        proof.add(branch)
+        self.assertFalse(proof.is_valid(target))
