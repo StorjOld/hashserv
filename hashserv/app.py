@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 
 # Application imports
 from hashserv.DataHash import DataHash
@@ -27,7 +27,7 @@ def submit(sha256_hash):
 def show_block(block_num):
     """Shows the metadata for a particular block."""
     block = DataBlock(block_num)
-    return str(block)
+    return jsonify(block.to_json())
 
 
 if __name__ == '__main__':
