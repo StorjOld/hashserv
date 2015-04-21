@@ -1,5 +1,9 @@
 import hashlib
 
+class MerkleProof:
+	def __init__(self, left, right):
+		pass
+
 class MerkleTree:
 
 	def __init__(self):
@@ -19,9 +23,9 @@ class MerkleTree:
 		"""Hashes a content string and adds to the leaves."""
 		self.leaves.append(self.hash_f(content))
 
-	def add_hash(self, hash):
+	def add_hash(self, ahash):
 		"""Adds a single hash to the to the leaves."""
-		self.leaves.append(hash)
+		self.leaves.append(ahash)
 
 	def merkle_root(self):
 		"""Take a list of hashes, and return the root merkle hash."""
@@ -36,7 +40,8 @@ class MerkleTree:
 	def merkle_pair(self, hashes, target = None):
 		"""
 		Take a list of hashes, and return the parent row in the tree
-		of merkle hashes.
+		of merkle hashes. Optionally takes a target, in which case it
+		will return a branch of the proof.
 		"""
 		# if odd then append first entry to the end of the list
 		if len(hashes) % 2 == 1:
@@ -56,6 +61,7 @@ class MerkleTree:
 		hashes = self.leaves
 		proof = []
 
+		# Reduce list till we have a merkle root, but extra target
 		while len(hashes) > 1:
 			pair = self.merkle_pair(hashes, target)
 			proof.append(pair)

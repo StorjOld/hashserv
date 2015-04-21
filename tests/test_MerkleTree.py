@@ -6,8 +6,10 @@ class MerkleTree_Test(unittest.TestCase):
 	def test_simple_sha256(self):
 		tree = MerkleTree()
 		result = tree.sha256("test")
+		result2 = tree.hash_f("test")
 		ans = '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08'
 		self.assertEqual(result, ans)
+		self.assertEqual(result2, ans)
 
 	def test_two_even_items(self):
 		tree = MerkleTree()

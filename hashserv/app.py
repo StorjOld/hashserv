@@ -7,10 +7,13 @@ from DataBlock import DataBlock
 # Initialize the Flask application
 app = Flask(__name__)
 
+@app.route('/')
+def index():
+	return "hello world."
 
 @app.route('/api/submit/<sha256_hash>')
 def submit(sha256_hash):
-	
+	"""Submit a hash to the queue."""
 	datahash = DataHash(sha256_hash)
 	if not datahash.is_sha256():
 		return "400: Invalid SHA256 Hash."
@@ -18,8 +21,8 @@ def submit(sha256_hash):
 		return datahash.to_db()
 
 @app.route('/api/block/<block_num>')
-def block_list(block_num):
-	
+def show_block(block_num):
+	"""Shows the metadata for a particular block."""
 	block = DataBlock(block_num)
 	return str(block)
 
