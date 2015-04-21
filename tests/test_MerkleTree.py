@@ -37,7 +37,3 @@ class MerkleTree_Test(unittest.TestCase):
 		target = tree.hash_f("test3")
 		proof = tree.merkle_proof(target)
 		self.assertEqual(proof[1][0], ans)
-
-if __name__ == '__main__':
-	suite = unittest.TestLoader().loadTestsFromTestCase(MerkleTree_Test)
-	unittest.TextTestRunner(verbosity=2).run(suite)
