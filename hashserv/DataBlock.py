@@ -1,28 +1,14 @@
-import json
-import sqlite3
-from flask import Flask, g
-
-# Application imports
 from hashserv.MerkleTree import MerkleTree
 
 
-# Initialize the Flask application
-app = Flask(__name__)
-app.config['DATABASE'] = '/db/hashserv.db'
-
-
-# Database code
-def connect_db():
-    return sqlite3.connect(app.config['DATABASE'])
-
-
 class DataBlock:
-    def __init__(self, block_num):
+    def __init__(self, block_num, conn=None):
         """Validating and inserting data hashes into the database."""
         self.block_num = int(block_num)
         self.merkle_tree = MerkleTree()
         self.closed = False
         self.tx_id = None
+        self.conn = conn
 
     def close(self):
         """Close block, and generate Merkle root."""
@@ -30,11 +16,10 @@ class DataBlock:
 
     def find_leaves(self):
         """Find leaves from database and generate tree."""
-        g.db = connect_db()
 
         """Get the items for this block."""
         query = 'SELECT * FROM hash_table where block=? ORDER BY id DESC'
-        cur = g.db.execute(query, (self.block_num,))
+        cur = self.conn.execute(query, (self.block_num,))
 
         for row in cur.fetchall():
             self.add_hash(row[1])
@@ -61,5 +46,4 @@ class DataBlock:
         return block_data
 
     def generate(self):
-        """Generate the block and insert into the database."""
         pass

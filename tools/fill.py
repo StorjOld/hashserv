@@ -10,10 +10,10 @@ loop = True
 try:
     print("Will insert data until you CTRL+C...")
     while loop:
-        hash = sha256(str(random.random()))
+        ahash = sha256(str(random.random()))
         time.sleep(delay)
-        urllib.request.urlopen(url.format(hash))
-        print(hash)
+        urllib.request.urlopen(url.format(ahash))
+        print(ahash)
 
 except KeyboardInterrupt:
     loop = False

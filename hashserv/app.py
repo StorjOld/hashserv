@@ -1,13 +1,22 @@
+import sqlite3
 from flask import Flask, jsonify
 
 # Application imports
 from hashserv.DataHash import DataHash
 from hashserv.DataBlock import DataBlock
 
+
 # Initialize the Flask application
 app = Flask(__name__)
+app.config['DATABASE'] = '/db/hashserv.db'
 
 
+# Database code
+def connect_db():
+    return sqlite3.connect(app.config['DATABASE'])
+
+
+# Routes
 @app.route('/')
 def index():
     return "hello world."
@@ -16,7 +25,8 @@ def index():
 @app.route('/api/submit/<sha256_hash>')
 def submit(sha256_hash):
     """Submit a hash to the queue."""
-    datahash = DataHash(sha256_hash)
+    conn = connect_db()
+    datahash = DataHash(sha256_hash, conn)
     if not datahash.is_sha256():
         return "400: Invalid SHA256 Hash."
     else:
@@ -26,7 +36,8 @@ def submit(sha256_hash):
 @app.route('/api/block/<block_num>')
 def show_block(block_num):
     """Shows the metadata for a particular block."""
-    block = DataBlock(block_num)
+    conn = connect_db()
+    block = DataBlock(block_num, conn)
     block.find_leaves()
     block.close()
     return jsonify(block.to_json())

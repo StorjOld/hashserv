@@ -1,20 +1,7 @@
-import sqlite3
-from flask import Flask, g
-
-
-# Initialize the Flask application
-app = Flask(__name__)
-app.config['DATABASE'] = '/db/hashserv.db'
-
-
-# Database code
-def connect_db():
-    return sqlite3.connect(app.config['DATABASE'])
-
-
 class DataHash:
-    def __init__(self, ahash):
+    def __init__(self, ahash, conn=None):
         """Validating and inserting data hashes into the database."""
+        self.conn = conn
         self.ahash = ahash
 
     def is_sha256(self):
@@ -27,17 +14,14 @@ class DataHash:
 
     def to_db(self):
         """Insert hash into the database."""
-        # Connect
-        g.db = connect_db()
-
         # Check for duplicates
         block_num = self.check_db()
 
         # If not duplicates then insert
         if block_num is None:
             query = "INSERT INTO hash_table (hash, block) VALUES (?, ?)"
-            g.db.execute(query, (self.ahash, 1,))
-            g.db.commit()
+            self.conn.execute(query, (self.ahash, 1,))
+            self.conn.commit()
             return "1"
         else:
             return block_num[2]
@@ -45,5 +29,5 @@ class DataHash:
     def check_db(self):
         """Make sure there is no duplicate hash."""
         query = "SELECT * FROM hash_table WHERE hash=?"
-        cur = g.db.execute(query, (self.ahash,))
+        cur = self.conn.execute(query, (self.ahash,))
         return cur.fetchone()

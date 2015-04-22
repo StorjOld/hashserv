@@ -1,6 +1,8 @@
 import unittest
+
 from hashserv.MerkleTree import sha256
 from hashserv.DataBlock import DataBlock
+
 
 class DataBlockTest(unittest.TestCase):
 
