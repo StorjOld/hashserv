@@ -12,19 +12,26 @@ class DataHash:
                 return False
         return len(self.ahash) == 64
 
+    def latest_block(self):
+        """Give us the lastest block number."""
+        query = "SELECT Count(*) FROM block_table"
+        cur = self.conn.execute(query)
+        return int(cur.fetchone()[0])
+
     def to_db(self):
         """Insert hash into the database."""
-        # Check for duplicates
-        block_num = self.check_db()
+        # Check for duplicates and get latest block number
+        block_num = self.check_db()[2]
+        latest_block = self.latest_block()
 
         # If not duplicate then insert
         if block_num is None:
             query = "INSERT INTO hash_table (hash, block) VALUES (?, ?)"
-            self.conn.execute(query, (self.ahash, 1,))
+            self.conn.execute(query, (self.ahash, latest_block,))
             self.conn.commit()
-            return "1"  # magic int
+            return latest_block
         else:
-            return block_num[2]
+            return block_num
 
     def check_db(self):
         """Make sure there is no duplicate hash."""
