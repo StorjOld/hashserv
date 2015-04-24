@@ -21,8 +21,12 @@ class DataBlock:
         query = 'SELECT * FROM hash_table where block=? ORDER BY id DESC'
         cur = self.conn.execute(query, (self.block_num,))
 
-        for row in cur.fetchall():
-            self.add_hash(row[1])
+        hashes = cur.fetchall()
+        if len(hashes) > 0:
+            for row in hashes:
+                self.add_hash(row[1])
+        else:
+            raise LookupError("Empty Block.")
 
     def add_hash(self, ahash):
         """As long as its not closed add hash."""

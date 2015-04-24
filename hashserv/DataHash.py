@@ -17,12 +17,12 @@ class DataHash:
         # Check for duplicates
         block_num = self.check_db()
 
-        # If not duplicates then insert
+        # If not duplicate then insert
         if block_num is None:
             query = "INSERT INTO hash_table (hash, block) VALUES (?, ?)"
             self.conn.execute(query, (self.ahash, 1,))
             self.conn.commit()
-            return "1"
+            return "1" # magic int
         else:
             return block_num[2]
 
