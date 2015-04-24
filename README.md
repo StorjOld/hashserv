@@ -39,3 +39,27 @@ Returns the content of a particular block.
 		- block_num
 		Returns:
 		- Block data
+		
+Sample Output:
+
+    {
+      "block_num": 1,
+      "closed": true,
+      "leaves": [
+        "da374a516e995319b65200dac1a1846bca567fa815ec069340d6a786145192c4",
+        "00d8f97417e848cb7df29e0e9834e2a8cab9f411d7d2f95ee56ef5083010a84c"
+      ],
+      "merkle_root": "8087f1a140d5ebf7753812a2ac92f9335eddf6562509f63b672783e400a5ebb8",
+      "tx_id": null
+    }
+    
+The latest block on this federated server.
+    
+    GET /api/recent_block
+        Returns:
+        - Number of the latest block
+        
+Sample Output:
+
+    78
+
