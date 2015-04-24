@@ -19,6 +19,7 @@ def init_db():
             db.cursor().executescript(f.read())
         db.commit()
 
+
 def connect_db():
     return sqlite3.connect(app.config['DATABASE'])
 

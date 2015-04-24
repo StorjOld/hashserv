@@ -22,7 +22,7 @@ class DataHash:
             query = "INSERT INTO hash_table (hash, block) VALUES (?, ?)"
             self.conn.execute(query, (self.ahash, 1,))
             self.conn.commit()
-            return "1" # magic int
+            return "1"  # magic int
         else:
             return block_num[2]
 
