@@ -37,6 +37,11 @@ class DataBlock:
         if self.closed:
             return self.merkle_tree.merkle_root()
 
+    def merkle_proof(self, target):
+        """Find the Merkle proof of a target."""
+        if self.closed:
+            return self.merkle_tree.merkle_proof(target)
+
     def to_json(self):
         """For the API."""
         block_data = {

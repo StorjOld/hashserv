@@ -21,7 +21,7 @@ class DataHash:
     def to_db(self):
         """Insert hash into the database."""
         # Check for duplicates and get latest block number
-        block_num = self.check_db()[2]
+        block_num = self.check_db()
         latest_block = self.latest_block()
 
         # If not duplicate then insert
@@ -31,7 +31,7 @@ class DataHash:
             self.conn.commit()
             return latest_block
         else:
-            return block_num
+            return block_num[2]
 
     def check_db(self):
         """Make sure there is no duplicate hash."""

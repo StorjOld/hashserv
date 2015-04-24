@@ -38,7 +38,7 @@ def submit(sha256_hash):
     if not datahash.is_sha256():
         return "400: Invalid SHA256 Hash."
     else:
-        return datahash.to_db()
+        return str(datahash.to_db())
 
 
 @app.route('/api/block/<block_num>')
@@ -49,11 +49,14 @@ def show_block(block_num):
     try:
         block = DataBlock(block_num, conn)
         block.find_leaves()
-        block.close()
         return jsonify(block.to_json())
     except LookupError:
         return "Empty Block."
 
+@app.route('/api/block/latest_block')
+def latest_block():
+    conn = connect_db()
+    return str(DataHash(None, conn).latest_block())
 
 if __name__ == '__main__':
     # Run the Flask app

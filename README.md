@@ -55,7 +55,7 @@ Sample Output:
     
 The latest block on this federated server.
     
-    GET /api/recent_block
+    GET /api/block/latest_block
         Returns:
         - Number of the latest block
         
