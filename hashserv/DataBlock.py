@@ -14,6 +14,10 @@ class DataBlock:
         """Close block, and generate Merkle root."""
         self.closed = True
 
+    def generate_block(self):
+        """Close the current block, and generate a new one."""
+        pass
+
     def find_leaves(self):
         """Find leaves from database and generate tree."""
 
