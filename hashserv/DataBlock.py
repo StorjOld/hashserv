@@ -2,6 +2,13 @@ from hashserv.DataHash import DataHash
 from hashserv.MerkleTree import MerkleTree
 
 
+def latest_block(conn):
+    """Give us the lastest block number."""
+    query = "SELECT Count(*) FROM block_table"
+    cur = conn.execute(query)
+    return int(cur.fetchone()[0])
+
+
 class DataBlock:
     def __init__(self, block_num, conn=None):
         """Validating and inserting data hashes into the database."""
@@ -9,10 +16,11 @@ class DataBlock:
         self.merkle_tree = MerkleTree()
         self.closed = False
         self.tx_id = None
+
         self.conn = conn
 
     def close(self):
-        """Close block, and generate Merkle root."""
+        """Close block, so a Merkle root can be generated."""
         self.closed = True
 
     def generate_block(self):
@@ -23,7 +31,7 @@ class DataBlock:
             latest_hash = DataHash(None, self.conn).latest_hash()
 
             # Get Merkle Root
-            self.closed = True
+            self.close()
             self.find_leaves()
 
             # Close current block

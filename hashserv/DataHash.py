@@ -1,3 +1,9 @@
+def latest_hash(self, conn):
+    """Give us the lastest hash number."""
+    query = "SELECT * FROM hash_table ORDER BY id DESC"
+    cur = conn.execute(query)
+    return int(cur.fetchone()[0])
+
 class DataHash:
     def __init__(self, ahash, conn=None):
         """Validating and inserting data hashes into the database."""
@@ -11,18 +17,6 @@ class DataHash:
             if not self.ahash[i] in digits58:
                 return False
         return len(self.ahash) == 64
-
-    def latest_block(self):
-        """Give us the lastest block number."""
-        query = "SELECT Count(*) FROM block_table"
-        cur = self.conn.execute(query)
-        return int(cur.fetchone()[0])
-
-    def latest_hash(self):
-        """Give us the lastest hash number."""
-        query = "SELECT * FROM hash_table ORDER BY id DESC"
-        cur = self.conn.execute(query)
-        return int(cur.fetchone()[0])
 
     def to_db(self):
         """Insert hash into the database."""

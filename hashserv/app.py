@@ -5,6 +5,8 @@ from flask import Flask, jsonify
 # Application imports
 from hashserv.DataHash import DataHash
 from hashserv.DataBlock import DataBlock
+from hashserv.DataHash import latest_hash
+from hashserv.DataBlock import latest_block
 
 
 # Initialize the Flask application
@@ -27,10 +29,9 @@ def connect_db():
 # Routes
 @app.route('/')
 def index():
-    conn = connect_db()
-    latest = int(DataHash(None, conn).latest_block())
+    block_num = latest_block(connect_db())
     output = ""
-    for i in range(latest):
+    for i in range(block_num):
         output += "<a href='/api/block/{0}'>Block {1}</a><br/>".format(str(i), str(i))
     return output
 
