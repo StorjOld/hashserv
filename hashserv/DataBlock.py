@@ -1,3 +1,4 @@
+from hashserv.DataHash import DataHash
 from hashserv.MerkleTree import MerkleTree
 
 
@@ -16,7 +17,37 @@ class DataBlock:
 
     def generate_block(self):
         """Close the current block, and generate a new one."""
-        pass
+
+        try:
+            latest_block = DataHash(None, self.conn).latest_block()
+            latest_hash = DataHash(None, self.conn).latest_hash()
+
+            # Get Merkle Root
+            self.closed = True
+            self.find_leaves()
+
+            # Close current block
+            c = self.conn.cursor()
+            query1 = "UPDATE block_table SET end_hash=?, closed=?, merkle_root=? WHERE id=?"
+            c.execute(query1, (latest_hash, True, self.merkle_root(), latest_block))
+
+            # Start new block
+            query2 = "INSERT INTO block_table (start_hash) VALUES (?)"
+            c.execute(query2, ( latest_hash,))
+
+            self.conn.commit()
+            self.conn.close()
+            return 'Block ' + str(latest_block) + " Built."
+        except LookupError:
+            return 'Block ' + str(latest_block) + " Empty."
+
+    def is_closed(self):
+        query = 'SELECT * FROM block_table where id=?'
+        cur = self.conn.execute(query, (self.block_num,))
+        block = cur.fetchone()
+        self.closed = block[3]
+        return self.closed
+
 
     def find_leaves(self):
         """Find leaves from database and generate tree."""
@@ -50,13 +81,10 @@ class DataBlock:
         """For the API."""
         block_data = {
             'block_num': self.block_num,
-            'closed': self.closed,
+            'closed': self.is_closed(),
             'merkle_root': self.merkle_root(),
             'tx_id': self.tx_id,
             'leaves': self.merkle_tree.leaves
         }
 
         return block_data
-
-    def generate(self):
-        pass
