@@ -33,7 +33,7 @@ class DataBlock:
 
             # Start new block
             query2 = "INSERT INTO block_table (start_hash) VALUES (?)"
-            c.execute(query2, ( latest_hash,))
+            c.execute(query2, (latest_hash,))
 
             self.conn.commit()
             self.conn.close()
@@ -48,7 +48,6 @@ class DataBlock:
         self.closed = block[3]
         return self.closed
 
-
     def find_leaves(self):
         """Find leaves from database and generate tree."""
 
@@ -62,6 +61,8 @@ class DataBlock:
                 self.add_hash(row[1])
         else:
             raise LookupError("Empty Block.")
+
+        self.is_closed()
 
     def add_hash(self, ahash):
         """As long as its not closed add hash."""
@@ -81,7 +82,7 @@ class DataBlock:
         """For the API."""
         block_data = {
             'block_num': self.block_num,
-            'closed': self.is_closed(),
+            'closed': self.closed,
             'merkle_root': self.merkle_root(),
             'tx_id': self.tx_id,
             'leaves': self.merkle_tree.leaves

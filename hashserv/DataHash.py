@@ -24,7 +24,6 @@ class DataHash:
         cur = self.conn.execute(query)
         return int(cur.fetchone()[0])
 
-
     def to_db(self):
         """Insert hash into the database."""
         # Check for duplicates and get latest block number

@@ -28,17 +28,18 @@ def connect_db():
 @app.route('/')
 def index():
     conn = connect_db()
-    latest =  int(DataHash(None, conn).latest_block())
+    latest = int(DataHash(None, conn).latest_block())
     output = ""
     for i in range(latest):
         output += "<a href='/api/block/{0}'>Block {1}</a><br/>".format(str(i), str(i))
     return output
 
+
 @app.route('/api/block/close')
 def close_block():
     conn = connect_db()
-    latest_block =  int(DataHash(None, conn).latest_block())
-    block = DataBlock(latest_block, conn)
+    latest = int(DataHash(None, conn).latest_block())
+    block = DataBlock(latest, conn)
     return str(block.generate_block())
 
 
@@ -64,6 +65,7 @@ def show_block(block_num):
         return jsonify(block.to_json())
     except LookupError:
         return "Empty Block."
+
 
 @app.route('/api/block/latest_block')
 def latest_block():
