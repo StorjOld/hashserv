@@ -27,7 +27,7 @@ class DataBlock:
         """Close the current block, and generate a new one."""
 
         try:
-            latest_block = DataHash(None, self.conn).latest_block()
+            last_block = DataHash(None, self.conn).latest_block()
             latest_hash = DataHash(None, self.conn).latest_hash()
 
             # Get Merkle Root
@@ -37,7 +37,7 @@ class DataBlock:
             # Close current block
             c = self.conn.cursor()
             query1 = "UPDATE block_table SET end_hash=?, closed=?, merkle_root=? WHERE id=?"
-            c.execute(query1, (latest_hash, True, self.merkle_root(), latest_block))
+            c.execute(query1, (latest_hash, True, self.merkle_root(), last_block))
 
             # Start new block
             query2 = "INSERT INTO block_table (start_hash) VALUES (?)"
@@ -45,9 +45,9 @@ class DataBlock:
 
             self.conn.commit()
             self.conn.close()
-            return 'Block ' + str(latest_block) + " Built."
+            return 'Block ' + str(last_block) + " Built."
         except LookupError:
-            return 'Block ' + str(latest_block) + " Empty."
+            return 'Block ' + str(last_block) + " Empty."
 
     def is_closed(self):
         query = 'SELECT * FROM block_table where id=?'

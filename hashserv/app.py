@@ -25,6 +25,12 @@ def init_db():
 def connect_db():
     return sqlite3.connect(app.config['DATABASE'])
 
+def init_db():
+    with closing(connect_db()) as db:
+        with app.open_resource('schema.sql', mode='r') as f:
+            db.cursor().executescript(f.read())
+        db.commit()
+
 
 # Routes
 @app.route('/')
@@ -39,7 +45,7 @@ def index():
 @app.route('/api/block/close')
 def close_block():
     conn = connect_db()
-    latest = int(DataHash(None, conn).latest_block())
+    latest = int(latest_block(conn))
     block = DataBlock(latest, conn)
     return str(block.generate_block())
 
@@ -68,10 +74,9 @@ def show_block(block_num):
         return "Empty Block."
 
 
-@app.route('/api/block/latest_block')
-def latest_block():
-    conn = connect_db()
-    return str(DataHash(None, conn).latest_block())
+@app.route('/api/block/last_block')
+def last_block():
+    return latest_block(connect_db())
 
 if __name__ == '__main__':
     # Run the Flask app
