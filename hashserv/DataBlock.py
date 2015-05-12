@@ -1,4 +1,4 @@
-from hashserv.DataHash import DataHash
+from hashserv.DataHash import latest_hash
 from hashserv.MerkleTree import MerkleTree
 
 
@@ -27,8 +27,8 @@ class DataBlock:
         """Close the current block, and generate a new one."""
 
         try:
-            last_block = DataHash(None, self.conn).latest_block()
-            latest_hash = DataHash(None, self.conn).latest_hash()
+            last_block = latest_block(self.conn)
+            last_hash = latest_hash(self.conn)
 
             # Get Merkle Root
             self.close()
@@ -37,11 +37,11 @@ class DataBlock:
             # Close current block
             c = self.conn.cursor()
             query1 = "UPDATE block_table SET end_hash=?, closed=?, merkle_root=? WHERE id=?"
-            c.execute(query1, (latest_hash, True, self.merkle_root(), last_block))
+            c.execute(query1, (last_hash, True, self.merkle_root(), last_block))
 
             # Start new block
             query2 = "INSERT INTO block_table (start_hash) VALUES (?)"
-            c.execute(query2, (latest_hash,))
+            c.execute(query2, (last_hash,))
 
             self.conn.commit()
             self.conn.close()

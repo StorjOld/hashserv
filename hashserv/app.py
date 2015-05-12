@@ -5,7 +5,6 @@ from flask import Flask, jsonify
 # Application imports
 from hashserv.DataHash import DataHash
 from hashserv.DataBlock import DataBlock
-from hashserv.DataHash import latest_hash
 from hashserv.DataBlock import latest_block
 
 
@@ -25,6 +24,7 @@ def init_db():
 def connect_db():
     return sqlite3.connect(app.config['DATABASE'])
 
+
 def init_db():
     with closing(connect_db()) as db:
         with app.open_resource('schema.sql', mode='r') as f:
@@ -37,7 +37,7 @@ def init_db():
 def index():
     block_num = latest_block(connect_db())
     output = ""
-    for i in range(block_num):
+    for i in range(block_num+1):
         output += "<a href='/api/block/{0}'>Block {1}</a><br/>".format(str(i), str(i))
     return output
 
@@ -76,7 +76,7 @@ def show_block(block_num):
 
 @app.route('/api/block/last_block')
 def last_block():
-    return latest_block(connect_db())
+    return str(latest_block(connect_db()))
 
 if __name__ == '__main__':
     # Run the Flask app

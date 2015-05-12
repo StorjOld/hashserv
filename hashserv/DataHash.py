@@ -1,3 +1,6 @@
+from hashserv.DataBlock import latest_block
+
+
 def latest_hash(conn):
     """Give us the lastest hash from DB."""
     query = "SELECT * FROM hash_table ORDER BY id DESC"
@@ -30,7 +33,7 @@ class DataHash:
 
         # Check for duplicates and get latest block number
         block_num = self.check_db()
-        latest_block = self.latest_block()
+        latest_block = latest_block()
 
         # If not duplicate then insert
         if block_num is None:
