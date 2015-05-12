@@ -33,12 +33,12 @@ class DataHash:
 
         # Check for duplicates and get latest block number
         block_num = self.check_db()
-        latest_block = latest_block()
+        last_block = latest_block()
 
         # If not duplicate then insert
         if block_num is None:
             query = "INSERT INTO hash_table (hash, block) VALUES (?, ?)"
-            self.conn.execute(query, (self.ahash, latest_block,))
+            self.conn.execute(query, (self.ahash, last_block,))
             self.conn.commit()
             return latest_block
         else:
