@@ -67,3 +67,10 @@ class MerkleTreeTest(unittest.TestCase):
         proof = MerkleProof()
         proof.add(branch)
         self.assertFalse(proof.is_valid(target))
+
+    def test_large_tree(self):
+        tree = MerkleTree()
+        for i in range(10000):
+            tree.add_content(str(i))
+        ans = 'a048d580177b80a60cbd31355400a0c9eabb5d2d3a4704fc9c86bae277f985c7'
+        self.assertEqual(tree.merkle_root(), ans)
