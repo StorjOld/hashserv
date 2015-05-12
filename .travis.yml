@@ -9,7 +9,7 @@ install:
 
 # command to run tests, e.g. python setup.py test
 script:  
-  - python -m unittest discover -v
+  - coverage run --source cookiecutter setup.py test
 
 # post to slack
 notifications:
