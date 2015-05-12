@@ -1,5 +1,6 @@
 from hashserv.Database import latest_block
 
+
 class DataHash:
     def __init__(self, ahash, conn=None):
         """A hashed data object."""
