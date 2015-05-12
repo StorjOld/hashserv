@@ -25,7 +25,7 @@ class DataHash:
 
         # Check for duplicates and get latest block number
         block_num = self.check_db()
-        last_block = latest_block()
+        last_block = latest_block(self.conn)
 
         # If not duplicate then insert
         if block_num is None:

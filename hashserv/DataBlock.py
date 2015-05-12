@@ -84,7 +84,7 @@ class DataBlock:
         """For the API."""
         block_data = {
             'block_num': self.block_num,
-            'closed': self.closed,
+            'closed': bool(self.closed),
             'merkle_root': self.merkle_root(),
             'tx_id': self.tx_id,
             'leaves': self.merkle_tree.leaves
