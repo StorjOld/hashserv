@@ -39,9 +39,9 @@ class DataBlock:
 
             self.conn.commit()
             self.conn.close()
-            return 'Block ' + str(last_block) + " Built."
+            return 'Block {0} Built.'.format(last_block)
         except LookupError:
-            return 'Block ' + str(last_block) + " Empty."
+            return 'Block Empty.'
 
     def is_closed(self):
         query = 'SELECT * FROM block_table where id=?'
