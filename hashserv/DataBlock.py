@@ -1,12 +1,6 @@
-from hashserv.DataHash import latest_hash
+from hashserv.Database import latest_hash
+from hashserv.Database import latest_block
 from hashserv.MerkleTree import MerkleTree
-
-
-def latest_block(conn):
-    """Give us the lastest block number."""
-    query = "SELECT Count(*) FROM block_table"
-    cur = conn.execute(query)
-    return int(cur.fetchone()[0])
 
 
 class DataBlock:

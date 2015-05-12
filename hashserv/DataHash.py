@@ -1,12 +1,4 @@
-from hashserv.DataBlock import latest_block
-
-
-def latest_hash(conn):
-    """Give us the lastest hash from DB."""
-    query = "SELECT * FROM hash_table ORDER BY id DESC"
-    cur = conn.execute(query)
-    return int(cur.fetchone()[0])
-
+from hashserv.Database import latest_block
 
 class DataHash:
     def __init__(self, ahash, conn=None):
