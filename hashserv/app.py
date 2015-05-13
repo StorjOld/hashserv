@@ -1,6 +1,6 @@
 import sqlite3
 from contextlib import closing
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 
 # Application imports
 from hashserv.DataHash import DataHash
@@ -29,6 +29,8 @@ def connect_db():
 @app.route('/')
 def index():
     """Displays a searchable list of blocks."""
+    return render_template('index.html')
+
     num_blocks = latest_block(connect_db())
     output = ""
     for block in range(1, num_blocks+1):
