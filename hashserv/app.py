@@ -29,13 +29,12 @@ def connect_db():
 @app.route('/')
 def index():
     """Displays a searchable list of blocks."""
-    return render_template('index.html')
-
     num_blocks = latest_block(connect_db())
-    output = ""
-    for block in range(1, num_blocks+1):
-        output += "<a href='/api/block/{0}'>Block {1}</a><br/>".format(str(block), str(block))
-    return output
+    if num_blocks <= 5:
+        num_show = 0
+    else:
+        num_show = num_blocks - 5
+    return render_template('index.html', num_blocks=num_blocks, num_show= num_show)
 
 
 @app.route('/api/submit/<sha256_hash>')
