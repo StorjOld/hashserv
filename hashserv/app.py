@@ -31,7 +31,7 @@ def index():
     """Displays a searchable list of blocks."""
     num_blocks = latest_block(connect_db())
     output = ""
-    for block in range(num_blocks+1):
+    for block in range(1, num_blocks+1):
         output += "<a href='/api/block/{0}'>Block {1}</a><br/>".format(str(block), str(block))
     return output
 
