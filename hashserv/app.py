@@ -36,15 +36,6 @@ def index():
     return output
 
 
-@app.route('/api/block/generate')
-def close_block():
-    """Closes the current block and starts a new one."""
-    conn = connect_db()
-    last_block = latest_block(conn)
-    block = DataBlock(last_block, conn)
-    return str(block.generate_block())
-
-
 @app.route('/api/submit/<sha256_hash>')
 def submit(sha256_hash):
     """Submit a SHA256 hash to an most recent open block."""
@@ -53,6 +44,30 @@ def submit(sha256_hash):
         return "400: Invalid SHA256 Hash."
     else:
         return str(datahash.to_db())
+
+
+@app.route('/api/proof/<sha256_hash>')
+def proof(sha256_hash):
+    """Get the Merkle proof for the hash."""
+    conn = connect_db()
+
+    datahash = DataHash(sha256_hash, conn)
+    num_block = datahash.check_db()[2]
+
+    if num_block is None:
+        return "Hash Not Found."
+    else:
+        block = DataBlock(int(num_block), conn)
+        return str(block)
+
+
+@app.route('/api/block/generate')
+def close_block():
+    """Closes the current block and starts a new one."""
+    conn = connect_db()
+    last_block = latest_block(conn)
+    block = DataBlock(last_block, conn)
+    return str(block.generate_block())
 
 
 @app.route('/api/block/<block_num>')

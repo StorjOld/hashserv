@@ -21,7 +21,8 @@ Proof of Existence for any data item that is in our Merkle Tree.
 
 # API
 Add a hash to the queue for the next block. Returns the block number that the data will
-be inserted into.
+be inserted into. In some cases the hash is a duplicate, so the API will return the block
+number that the hash is in.
     
     GET /api/submit/<sha256_hash>
         Parameters:
@@ -57,9 +58,8 @@ The latest block on this federated server.
     
     GET /api/block/latest_block
         Returns:
-        - Number of the latest block
+        - Block number of the latest block
         
 Sample Output:
 
     78
-
