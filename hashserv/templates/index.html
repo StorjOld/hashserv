@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8' />
+	<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+	<meta name="description" content="" />
+	<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.9.1.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/crypto.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/filedrop.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap-notify.js') }}"></script>
+	<title>HashServ</title>
+</head>
+
+<body>
+	<div class="container">
+		<div id="message" class="row"></div>
+		<div style="margin-top:48px;" class="notifications bottom-right"></div>
+		<div id="content">
+			<h1 class="icon">#</h1>
+			<h1>HashServ</h1>
+			<p>Calculate the hash of your files client-side</p>
+			<div id="wait" class="row">
+				<div class="spinner">
+					<div class="rect1"></div>
+					<div class="rect2"></div>
+					<div class="rect3"></div>
+					<div class="rect4"></div>
+					<div class="rect5"></div>
+				</div>
+				Loading...
+			</div>
+			<div id="explain"></div>
+			<form id="upload_form" style="display: none;" method="POST"
+				enctype="multipart/form-data" action="">
+				<input id='file' type="file" name="" />
+			</form>
+			<div id="filedrag" style="display: none;" class="dropbox">
+				<h3>Drag and Drop</h3>
+				<p>a file here or click to <span>browse</span><p>
+			</div>
+			
+			<small>Your files are not transferred to the server, everything is done directly in your browser.</small>
+		</div>
+        <div>
+            Latest Blocks:
+            <ul>
+                {%  for block in range(num_blocks, num_show, -1): %}
+                    <li><a href='/api/block/{{ block }}'>Block {{ block }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+	</div>
+	<script>
+		$(document).ready(function() {
+			var message = {
+				"format" : translate("Must select a file to upload"),
+				"existing" : translate("File already exists in the system since %s. Redirecting..."),
+				"added" : translate("File successfully added to system. Redirecting...")
+			}
+			
+			var bar = $('.bar');
+			var upload_submit = $("#upload_submit");
+			var upload_form = $('#upload_form');
+			var latest = $('#latest');
+			var latest_confirmed = $('#latest_confirmed');
+			var explain = $('#explain');
+			var dropbox = $('.dropbox');
+
+			// uncomment this to try non-HTML support:
+			//window.File = window.FileReader = window.FileList = window.Blob = null;
+			
+			var html5 = window.File && window.FileReader && window.FileList && window.Blob;
+			$("#wait").hide();
+			if (!html5) {
+				explain.html(translate("disclaimer"));
+				upload_form.show();
+			} else {
+				dropbox.show();
+				dropbox.filedrop({
+				    callback : handleFileSelect
+				});
+				dropbox.click(function() {
+					$("#file").click();
+				});
+			    $('#file').change(function(){
+			        
+			    })
+			}
+
+			// latest documents
+			var refreshLatest = function(confirmed, table) {
+				$.getJSON('/api/document/latest?confirmed='+confirmed, function(data) {
+					var items = [];
+
+					items.push('<thead><tr><th></th><th>' + translate('Document Digest') + '</th><th>'
+					  + translate('Timestamp') + '</th></tr></thead>');
+					$.each(data, function(index, obj) {
+						badge = "";
+						if (obj.tx) {
+							badge = '<span class="label label-success">✔</span>';
+						}
+						items.push('<tr><td>'+badge+'</td><td><a href="/detail/' + obj.digest+'">'+obj.digest +
+								'</a></td><td> ' + obj.timestamp + '</td></tr>');
+					});
+
+					table.empty();
+					$('<div/>', {
+						'class' : 'unstyled',
+						html : items.join('<br />')
+					}).appendTo(table);
+				});
+			}
+			refreshLatest("false", latest);
+			refreshLatest("true", latest_confirmed);
+
+			// client-side hash
+			var onRegisterSuccess = function(json) {
+				if (json.success) {
+					show_message(vsprintf(message["added"], []), "success");
+				} else {
+					if (json.args) {
+						show_message(vsprintf(message[json.reason], json.args), "success");
+					} else {
+						show_message(message[json.reason], "error");
+					}
+					
+				}
+				if (json.digest) {
+					window.setTimeout(function() {
+						window.location.replace("/detail/"+json.digest);
+					}, 5000);
+				}
+			}
+			
+			var crypto_callback = function(p) {
+				var w = ((p*100).toFixed(0));
+				bar.width( w+"%");
+				explain.html(translate("Now hashing... ")+(w)+"%");
+			}
+			
+			var crypto_finish = function(hash) {
+				bar.width(100 + "%");
+				explain.html(translate("Document hash: ")+hash);
+				$.getJSON('/api/submit/'+hash, onRegisterSuccess);
+			}
+			
+			function handleFileSelect(f) {
+				if (!html5) {
+					return;
+				}
+				explain.html(translate("Loading document..."));
+			    var output = "";
+			    output = translate('Preparing to hash ') + escape(f.name)
+					+ ' (' + (f.type || translate('n/a')) + ') - '
+					+ f.size + translate(' bytes, last modified: ')
+					+ (f.lastModifiedDate ? f.lastModifiedDate
+							.toLocaleDateString() : translate('n/a') )+ '';
+			    
+			    var reader = new FileReader();
+				reader.onload = function(e) {
+					var data = e.target.result;
+					bar.width(0+"%");
+					bar.addClass('bar-success');
+					explain.html(translate("Now hashing... ") + translate("Initializing"));
+					setTimeout(function() {
+						CryptoJS.SHA256(data,crypto_callback,crypto_finish);
+					}, 200);
+					
+				};
+				reader.onprogress = function(evt) {
+				    if (evt.lengthComputable) {
+				    	var w = (((evt.loaded / evt.total)*100).toFixed(2));
+						bar.width( w+"%");
+				    }
+				}
+				reader.readAsBinaryString(f);
+				show_message(output, "info");
+			}
+			
+			document.getElementById('file').addEventListener('change', function(evt) {
+				var f = evt.target.files[0];
+				handleFileSelect(f);
+			}, false);
+
+			// upload form (for non-html5 clients)
+			upload_submit.click(function(event) {
+				upload_form.ajaxForm({
+					dataType : 'json',
+					beforeSubmit : function() {
+						var percentVal = '0%';
+						bar.removeClass('bar-danger');
+						bar.removeClass('bar-warning');
+						bar.removeClass('bar-success');
+						bar.addClass('bar-info');
+						bar.width(percentVal)
+					},
+					uploadProgress : function(event, position, total, percentComplete) {
+						var percentVal = percentComplete + '%';
+						bar.width(percentVal)
+					},
+					success : onRegisterSuccess
+				});
+
+			});
+			
+			var show_message = function(message, type) {
+				if (!type)
+					type = "success";
+
+				$('.bottom-right').notify({
+					"type" : type,
+					message : {
+						"text" : message
+					},
+					fadeOut : {
+						enabled : true,
+						delay : 5000
+					}
+				}).show();
+			};
+		});
+
+		var disclaimer = "<strong>Important: </strong>Your browser does not support HTML5, so your document will need to be uploaded." +
+		  " The cryptographic digest will be calculated on our servers but the document will be" +
+		  " discarded immediately, without being stored, logged, or otherwise accessed. " +
+		  "Please contact us if you have any questions.";
+
+		var translate = function(msg){
+			if(msg == "disclaimer"){
+				return messages["disclaimer"] || disclaimer;
+			}
+			else{
+				return messages[msg] || msg;
+			}
+		};
+
+		var setLanguage = function(){
+			var myLang = $(".language").val();
+			var expiry = new Date(60 * 24 * 60 * 60 * 1000 + Date.now());
+			document.cookie="language=" + myLang + "; expires=" + expiry;
+			window.location.reload();
+		}
+
+		var messages = {"Must select a file to upload": "Must select a file to upload", "Document Hash": "Document hash: ", "Registered in the bitcoin blockchain since:": "Registered in the bitcoin blockchain since:", "n/a": "n/a", "Document proof embedded in the Bitcoin blockchain!": "Document proof embedded in the Bitcoin blockchain!", "File successfully added to system. Redirecting...": "File successfully added to system. Redirecting...", "Initializing": "Initializing", "Document proof not yet embedded in the bitcoin blockchain.": "Document proof not yet embedded in the bitcoin blockchain.", "Document Digest": "Document Digest", "Timestamp": "Timestamp", "transaction timestamp": "transaction timestamp", "Now hashing... ": "Now hashing... ", "Preparing to hash ": "Preparing to hash ", "Loading document...": "Loading document...", "Transaction": "Transaction", "We couldn't find that document": "We couldn't find that document", "Error!": "Error!", " bytes, last modified: ": " bytes, last modified: ", "Registered in our servers since:": "Registered in our servers since:", "Payment being processed. Please wait while the bitcoin transaction is confirmed by the network.": "Payment being processed. Please wait while the bitcoin transaction is confirmed by the network.", "File already exists in the system since %s. Redirecting...": "File already exists in the system since %s. Redirecting...", "disclaimer": "disclaimer"};	
+	</script>
+</body>
+</html>

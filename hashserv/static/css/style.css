@@ -1,0 +1,141 @@
+/*
+ * Import Fonts
+ */
+ 
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(http://fonts.googleapis.com/css?family=Muli:300,400);
+
+/*
+ * Base
+ */
+
+body {
+  height: 100%;
+  background: #107fc9;
+  color: #fff;
+}
+.container {
+  padding-top: 40px;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+}
+p, small {
+  font-family: "Muli", sans-serif;
+  color: #DCE3FF;
+}
+.icon {
+  font-size: 72px;
+  line-height: 40px;
+}
+.dropbox {
+	text-align: center;
+	padding: 5em 1em;
+	margin: 4em auto 2em;
+  background: #0C72B6;
+	border: 5px dashed #55BFFF;
+	cursor: default;
+}
+.dropbox h3 {
+  font-size: 36px;
+  text-transform: uppercase;
+}
+.dropbox p {
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.dropbox span {
+  text-decoration: underline;
+}
+#content {
+  text-align: center;
+}
+#explain {
+  margin-top: 2em;
+  font-family: "Muli", sans-serif;
+}
+small {
+  color: #55BFFF;
+}
+
+
+/*
+ * Bootstrap Notify 
+ */
+
+.notifications {
+  position: fixed;
+}
+.notifications.top-right {
+  right: 10px;
+  top: 25px;
+}
+.notifications.top-left {
+  left: 10px;
+  top: 25px;
+}
+.notifications.bottom-left {
+  left: 10px;
+  bottom: 25px;
+}
+.notifications.bottom-right {
+  right: 10px;
+  bottom: 25px;
+}
+.notifications > div {
+  position: relative;
+  z-index: 9999;
+  margin: 5px 0px;
+}
+
+
+/*
+ * Pretty spinner
+ */
+
+.spinner {
+  margin: 50px auto;
+  width: 50px;
+  height: 30px;
+  text-align: center;
+  font-size: 10px;
+}
+.spinner > div {
+  background-color: #333;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+  
+  -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+  animation: stretchdelay 1.2s infinite ease-in-out;
+}
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+@-webkit-keyframes stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+  20% { -webkit-transform: scaleY(1.0) }
+}
+@keyframes stretchdelay {
+  0%, 40%, 100% { 
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  } 20% {
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}
