@@ -33,6 +33,7 @@ class DataHash:
             query = "INSERT INTO hash_table (hash, block) VALUES (?, ?)"
             self.conn.execute(query, (self.ahash, last_block,))
             self.conn.commit()
-            return latest_block
+            return last_block
         else:
+            # It is a duplicate so return its block number
             return block_num[2]

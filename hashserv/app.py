@@ -60,7 +60,7 @@ def show_block(block_num):
     """Shows the metadata for a particular block."""
     try:
         block = DataBlock(block_num, connect_db())
-        block.find_leaves() # load object from db
+        block.find_leaves()  # load object from db
         return jsonify(block.to_json())
     except LookupError:
         return "Empty Block."
