@@ -16,4 +16,4 @@ create table block_table (
 );
 
 INSERT INTO hash_table (hash,block) VALUES ('e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', 1);
-INSERT INTO block_table (start_hash) VALUES (0);
+INSERT INTO block_table (start_hash) VALUES (1);
