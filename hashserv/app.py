@@ -28,26 +28,27 @@ def connect_db():
 # Routes
 @app.route('/')
 def index():
-    block_num = latest_block(connect_db())
+    """Displays a searchable list of blocks."""
+    num_blocks = latest_block(connect_db())
     output = ""
-    for i in range(block_num+1):
-        output += "<a href='/api/block/{0}'>Block {1}</a><br/>".format(str(i), str(i))
+    for block in range(num_blocks+1):
+        output += "<a href='/api/block/{0}'>Block {1}</a><br/>".format(str(block), str(block))
     return output
 
 
-@app.route('/api/block/close')
+@app.route('/api/block/generate')
 def close_block():
+    """Closes the current block and starts a new one."""
     conn = connect_db()
-    latest = int(latest_block(conn))
-    block = DataBlock(latest, conn)
+    last_block = latest_block(conn)
+    block = DataBlock(last_block, conn)
     return str(block.generate_block())
 
 
 @app.route('/api/submit/<sha256_hash>')
 def submit(sha256_hash):
-    """Submit a hash to the queue."""
-    conn = connect_db()
-    datahash = DataHash(sha256_hash, conn)
+    """Submit a SHA256 hash to an most recent open block."""
+    datahash = DataHash(sha256_hash, connect_db())
     if not datahash.is_sha256():
         return "400: Invalid SHA256 Hash."
     else:
@@ -57,18 +58,17 @@ def submit(sha256_hash):
 @app.route('/api/block/<block_num>')
 def show_block(block_num):
     """Shows the metadata for a particular block."""
-    conn = connect_db()
-
     try:
-        block = DataBlock(block_num, conn)
-        block.find_leaves()
+        block = DataBlock(block_num, connect_db())
+        block.find_leaves() # load object from db
         return jsonify(block.to_json())
     except LookupError:
         return "Empty Block."
 
 
-@app.route('/api/block/last_block')
-def last_block():
+@app.route('/api/block/latest')
+def latest():
+    """Returns the latest block number."""
     return str(latest_block(connect_db()))
 
 
