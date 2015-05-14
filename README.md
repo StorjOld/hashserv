@@ -1,8 +1,8 @@
 # hashserv
 
 [![Build Status](https://travis-ci.org/Storj/hashserv.svg?branch=master)]
-(https://travis-ci.org/Storj/hashserv)
-[![Coverage Status](https://coveralls.io/repos/Storj/hashserv/badge.svg?branch=master)](https://coveralls.io/r/Storj/hashserv?branch=master
+(https://travis-ci.org/Storj/hashserv) 
+[![Coverage Status](https://coveralls.io/repos/Storj/hashserv/badge.svg?branch=master)](https://coveralls.io/r/Storj/hashserv?branch=master)
 
 # What is this?
 
