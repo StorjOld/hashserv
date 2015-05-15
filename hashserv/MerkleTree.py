@@ -17,30 +17,32 @@ class MerkleBranch:
 
     def get_parent(self):
         """Get the parent of the branch."""
-        return self.hash_f(self.left + self.right)
+        self.parent = self.hash_f(self.left + self.right)
+        return self.parent
 
     def contains(self, target):
         return self.left == target or self.right == target
 
 
 class MerkleProof:
-    def __init__(self, hash_f=sha256):
+    def __init__(self, target, hash_f=sha256):
         """Build a Merkle proof."""
         self.hash_f = hash_f
         self.branches = []
+        self.target = target
 
     def add(self, branch):
         """Add a branch to the proof."""
         self.branches.append(branch)
 
-    def is_valid(self, target):
+    def is_valid(self):
         """Check if the target hash is in the proof."""
 
         # We assume that the leaf is contained in the
         # first branch of the proof, so then we check
         # if the parent is contained in each higher
         # branch.
-        new_target = target
+        new_target = self.target
         for branch in self.branches:
             if not branch.contains(new_target):
                 return False
@@ -94,12 +96,12 @@ class MerkleTree:
         """Gives the merkle proof of a particular leaf in the root."""
         # Generate list we can mutate
         hashes = self.leaves
-        proof = []
+        proof = MerkleProof(target)
 
         # Reduce list till we have a merkle root, but extra target
         while len(hashes) > 1:
             branch = self.merkle_pair(hashes, target)
-            proof.append(branch)
+            proof.add(branch)
             target = branch.get_parent()
             hashes = self.merkle_pair(hashes)
 
