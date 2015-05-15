@@ -22,10 +22,6 @@ class MerkleTreeTest(unittest.TestCase):
         ans = '694299f8eb01a328732fb21f4163fbfaa8f60d5662f04f52ad33bec63953ec7f'
         self.assertEqual(result, ans)
 
-        target = tree.hash_f("test")
-        proof = tree.merkle_proof(target)
-        self.assertEqual(proof[0].get_parent(), ans)
-
     def test_tree_odd_items(self):
         tree = MerkleTree()
         tree.add_content("test")
@@ -36,9 +32,12 @@ class MerkleTreeTest(unittest.TestCase):
         ans = 'd49e815a91a26d399f8c2fba429e6ef7e472e54b6eb1e04341d207eee219f6c0'
         self.assertEqual(result, ans)
 
-        target = tree.hash_f("test3")
-        proof = tree.merkle_proof(target)
-        self.assertEqual(proof[1].get_parent(), ans)
+    def test_large_tree(self):
+        tree = MerkleTree()
+        for i in range(10000):
+            tree.add_content(str(i))
+        ans = 'a048d580177b80a60cbd31355400a0c9eabb5d2d3a4704fc9c86bae277f985c7'
+        self.assertEqual(tree.merkle_root(), ans)
 
     def test_merkle_branch(self):
         left = sha256("test")
@@ -67,10 +66,3 @@ class MerkleTreeTest(unittest.TestCase):
         proof = MerkleProof()
         proof.add(branch)
         self.assertFalse(proof.is_valid(target))
-
-    def test_large_tree(self):
-        tree = MerkleTree()
-        for i in range(10000):
-            tree.add_content(str(i))
-        ans = 'a048d580177b80a60cbd31355400a0c9eabb5d2d3a4704fc9c86bae277f985c7'
-        self.assertEqual(tree.merkle_root(), ans)
