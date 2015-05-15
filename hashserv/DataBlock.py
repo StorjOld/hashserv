@@ -76,7 +76,8 @@ class DataBlock:
 
     def merkle_proof(self, target):
         """Find the Merkle proof of a target."""
-        if self.closed:
+        self.find_leaves()
+        if self.is_closed():
             return self.merkle_tree.merkle_proof(target)
 
     def to_json(self):

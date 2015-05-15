@@ -59,7 +59,15 @@ def proof(sha256_hash):
         return "Hash Not Found."
     else:
         block = DataBlock(int(num_block), conn)
-        return str(block)
+        proof = block.merkle_proof(sha256_hash)
+
+        json_proof = {
+            'target': sha256_hash,
+            'merkle_root': block.merkle_root(),
+            'proof': proof.get_json(),
+            'tx_id': None
+        }
+        return jsonify(json_proof)
 
 
 @app.route('/api/block/generate')

@@ -23,6 +23,14 @@ class MerkleBranch:
     def contains(self, target):
         return self.left == target or self.right == target
 
+    def get_json(self):
+        branch = {
+            'parent': self.get_parent(),
+            'left': self.left,
+            'right': self.right,
+        }
+        return branch
+
 
 class MerkleProof:
     def __init__(self, target, tree, hash_f=sha256):
@@ -39,7 +47,7 @@ class MerkleProof:
     def is_valid(self):
         """Check if the target hash is in the proof."""
 
-         # Check to see if we more than one hash
+        # Check to see if we more than one hash
         if len(self.tree.leaves) == 1:
             return self.tree.leaves[0] == self.target
 
@@ -55,6 +63,12 @@ class MerkleProof:
             new_target = branch.get_parent()
 
         return True
+
+    def get_json(self):
+        proof = []
+        for branch in self.branches:
+            proof.append(branch.get_json())
+        return proof
 
 
 class MerkleTree:

@@ -64,3 +64,31 @@ The latest block on this federated server.
 Sample Output:
 
     78
+
+Return a Merkle proof for an inserted item with a closed block.
+
+    GET /api/proof/<sha256_hash>
+         Parameters:
+        - sha256_hash
+        Returns:
+        - Merkle proof and other JSON data
+        
+Sample Output:
+
+    {
+      "merkle_root": "f8f8e3755e93a24284c97dc71d5daa3c25750458d4ebbd33f03ba507053c9748",
+      "proof": [
+        {
+          "left": "e970c5e381cc24fbfa478f711a50ce8577d36ab8cdb21e10e663e68eb051ff5b",
+          "parent": "075d3bed54db688da338a70e1c5c1a9437551571a3aeb79e8a11a1c1e9a1ab44",
+          "right": "e970c5e381cc24fbfa478f711a50ce8577d36ab8cdb21e10e663e68eb051ff5b"
+        },
+        {
+          "left": "77ef2b0d1fb3fab2c98bfbd64938b4c69430b2f11b452e825180771661bea76b",
+          "parent": "f8f8e3755e93a24284c97dc71d5daa3c25750458d4ebbd33f03ba507053c9748",
+          "right": "075d3bed54db688da338a70e1c5c1a9437551571a3aeb79e8a11a1c1e9a1ab44"
+        }
+      ],
+      "target": "e970c5e381cc24fbfa478f711a50ce8577d36ab8cdb21e10e663e68eb051ff5b",
+      "tx_id": null
+    }
