@@ -25,11 +25,12 @@ class MerkleBranch:
 
 
 class MerkleProof:
-    def __init__(self, target, hash_f=sha256):
+    def __init__(self, target, tree, hash_f=sha256):
         """Build a Merkle proof."""
         self.hash_f = hash_f
         self.branches = []
         self.target = target
+        self.tree = tree
 
     def add(self, branch):
         """Add a branch to the proof."""
@@ -38,10 +39,15 @@ class MerkleProof:
     def is_valid(self):
         """Check if the target hash is in the proof."""
 
+         # Check to see if we more than one hash
+        if len(self.tree.leaves) == 1:
+            return self.tree.leaves[0] == self.target
+
         # We assume that the leaf is contained in the
         # first branch of the proof, so then we check
         # if the parent is contained in each higher
         # branch.
+
         new_target = self.target
         for branch in self.branches:
             if not branch.contains(new_target):
@@ -90,13 +96,18 @@ class MerkleTree:
             l.append(self.hash_f(hashes[i] + hashes[i + 1]))
             if target == hashes[i] or target == hashes[i + 1]:
                 return MerkleBranch(hashes[i], hashes[i + 1], self.hash_f)
-        return l
+
+        if target is None:
+            return l
+        else:
+            return MerkleBranch(hashes[i], hashes[i + 1], self.hash_f)
 
     def merkle_proof(self, target):
         """Gives the merkle proof of a particular leaf in the root."""
+
         # Generate list we can mutate
         hashes = self.leaves
-        proof = MerkleProof(target)
+        proof = MerkleProof(target, self)
 
         # Reduce list till we have a merkle root, but extra target
         while len(hashes) > 1:

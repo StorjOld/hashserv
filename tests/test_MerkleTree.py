@@ -47,27 +47,6 @@ class MerkleTreeTest(unittest.TestCase):
         ans = '694299f8eb01a328732fb21f4163fbfaa8f60d5662f04f52ad33bec63953ec7f'
         self.assertEqual(branch.get_parent(), ans)
 
-    def test_merkle_proof_simple_true(self):
-        left = sha256("test")
-        right = sha256("test2")
-        branch = MerkleBranch(left, right)
-
-        target = left
-        proof = MerkleProof(target)
-        proof.add(branch)
-        self.assertTrue(proof.is_valid())
-
-    def test_merkle_proof_simple_false(self):
-        left = sha256("test")
-        right = sha256("test2")
-        branch = MerkleBranch(left, right)
-
-        target = sha256("notinproof")
-        proof = MerkleProof(target)
-        proof.add(branch)
-        self.assertFalse(proof.is_valid())
-
-    # fix from here
     def test_proof_true(self):
         tree = MerkleTree()
 
@@ -108,4 +87,32 @@ class MerkleTreeTest(unittest.TestCase):
         tree = MerkleTree()
         tree.add_content("test")
         proof = tree.merkle_proof(sha256("test9"))
+        self.assertFalse(proof.is_valid())
+
+    def test_merkle_proof_simple_true(self):
+        tree = MerkleTree()
+        tree.add_content("test")
+        tree.add_content("test2")
+
+        left = sha256("test")
+        right = sha256("test2")
+        branch = MerkleBranch(left, right)
+
+        target = left
+        proof = MerkleProof(target, tree)
+        proof.add(branch)
+        self.assertTrue(proof.is_valid())
+
+    def test_merkle_proof_simple_false(self):
+        tree = MerkleTree()
+        tree.add_content("test")
+        tree.add_content("test2")
+
+        left = sha256("test")
+        right = sha256("test2")
+        branch = MerkleBranch(left, right)
+
+        target = sha256("notinproof")
+        proof = MerkleProof(target, tree)
+        proof.add(branch)
         self.assertFalse(proof.is_valid())
