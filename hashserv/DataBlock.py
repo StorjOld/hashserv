@@ -44,10 +44,10 @@ class DataBlock:
             return 'Block Empty.'
 
     def is_closed(self):
-        query = 'SELECT * FROM block_table where id=?'
+        query = 'SELECT closed FROM block_table where id=?'
         cur = self.conn.execute(query, (self.block_num,))
         block = cur.fetchone()
-        self.closed = block[3]
+        self.closed = block[0]
         return self.closed
 
     def find_leaves(self):

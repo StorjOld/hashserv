@@ -34,7 +34,7 @@ def index():
         num_show = 0
     else:
         num_show = num_blocks - 5
-    return render_template('index.html', num_blocks=num_blocks, num_show= num_show)
+    return render_template('index.html', num_blocks=num_blocks, num_show=num_show)
 
 
 @app.route('/api/submit/<sha256_hash>')
@@ -80,6 +80,8 @@ def show_block(block_num):
         return jsonify(block.to_json())
     except LookupError:
         return "Empty Block."
+    except ValueError:
+        return "Invalid Parameter."
 
 
 @app.route('/api/block/latest')

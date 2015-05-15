@@ -7,6 +7,6 @@ def latest_block(conn):
 
 def latest_hash(conn):
     """Give us the lastest hash id from db."""
-    query = "SELECT * FROM hash_table ORDER BY id DESC"
+    query = "SELECT id FROM hash_table ORDER BY id DESC"
     cur = conn.execute(query)
     return int(cur.fetchone()[0])
