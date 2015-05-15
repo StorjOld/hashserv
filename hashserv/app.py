@@ -53,13 +53,16 @@ def proof(sha256_hash):
     conn = connect_db()
 
     datahash = DataHash(sha256_hash, conn)
-    num_block = datahash.check_db()[2]
+    num_block = datahash.check_db()
 
     if num_block is None:
         return "Hash Not Found."
     else:
-        block = DataBlock(int(num_block), conn)
+        block = DataBlock(int(num_block[2]), conn)
         proof = block.merkle_proof(sha256_hash)
+
+        if not block.is_closed():
+            return "Block Not Closed."
 
         json_proof = {
             'target': sha256_hash,
