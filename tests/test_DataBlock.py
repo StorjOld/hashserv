@@ -5,7 +5,6 @@ from hashserv.DataBlock import DataBlock
 
 
 class DataBlockTest(unittest.TestCase):
-
     def test_create_empty_block(self):
         block = DataBlock(1)
         block.close()

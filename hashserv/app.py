@@ -1,3 +1,8 @@
+import sys
+import os.path
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
 import sqlite3
 from contextlib import closing
 from flask import Flask, jsonify, render_template

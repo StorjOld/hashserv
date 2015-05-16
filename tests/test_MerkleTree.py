@@ -6,7 +6,6 @@ from hashserv.MerkleTree import MerkleProof
 
 
 class MerkleTreeTest(unittest.TestCase):
-
     def test_simple_sha256(self):
         tree = MerkleTree()
         result = tree.hash_f("test")
