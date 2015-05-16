@@ -44,6 +44,12 @@
 			
 			<small>Your files are not transferred to the server, everything is done directly in your browser.</small>
 		</div>
+		<div id="filesContainer" style="display:none;">
+			Added Files
+			<ul id="filesList">
+				
+			</ul>
+		</div>
         <div>
             Latest Blocks:
             <ul>
@@ -68,6 +74,7 @@
 			var latest_confirmed = $('#latest_confirmed');
 			var explain = $('#explain');
 			var dropbox = $('.dropbox');
+			var files = [];
 
 			// uncomment this to try non-HTML support:
 			//window.File = window.FileReader = window.FileList = window.Blob = null;
@@ -151,6 +158,9 @@
 				if (!html5) {
 					return;
 				}
+				
+				files.push(f);
+				
 				explain.html(translate("Loading document..."));
 			    var output = "";
 			    output = translate('Preparing to hash ') + escape(f.name)
@@ -167,6 +177,7 @@
 					explain.html(translate("Now hashing... ") + translate("Initializing"));
 					setTimeout(function() {
 						CryptoJS.SHA256(data,crypto_callback,crypto_finish);
+						bindAddedFiles();
 					}, 200);
 					
 				};
@@ -178,6 +189,17 @@
 				};
 				reader.readAsBinaryString(f);
 				show_message(output, "info");
+			}
+			
+			var bindAddedFiles = function () {
+				if(files && files.length > 0){
+					$("#filesContainer").show();
+					$("#filesList").empty();
+					for (var i = 0; i < files.length; i++) {
+						var fileName = files[i].name;
+						$("#filesList").prepend("<li>" + fileName + "</li>");						
+					}
+				}
 			}
 			
 			document.getElementById('file').addEventListener('change', function(evt) {
