@@ -1,7 +1,7 @@
 from flask import Flask
 
 app = Flask(__name__)
-app.config.from_object('config')
+app.config.from_pyfile('config.py')
 
 from btctxstore import BtcTxStore
 from hashserv.Database import latest_hash
@@ -107,7 +107,7 @@ class DataBlock:
             'block_num': self.block_num,
             'closed': bool(self.closed),
             'merkle_root': self.merkle_root(),
-            'tx_id': self.get_tx_id(),
+            'tx_id': self.tx_id,
             'leaves': self.merkle_tree.leaves
         }
 

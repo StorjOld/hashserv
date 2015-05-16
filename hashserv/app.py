@@ -93,6 +93,7 @@ def show_block(block_num):
     try:
         block = DataBlock(block_num, connect_db())
         block.find_leaves()  # load object from db
+        block.get_tx_id()
         return jsonify(block.to_json())
     except LookupError:
         return "Empty Block."
