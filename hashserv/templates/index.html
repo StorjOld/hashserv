@@ -59,7 +59,7 @@
 				"format" : translate("Must select a file to upload"),
 				"existing" : translate("File already exists in the system since %s. Redirecting..."),
 				"added" : translate("File successfully added to system. Redirecting...")
-			}
+			};
 			
 			var bar = $('.bar');
 			var upload_submit = $("#upload_submit");
@@ -112,7 +112,7 @@
 						html : items.join('<br />')
 					}).appendTo(table);
 				});
-			}
+			};
 			refreshLatest("false", latest);
 			refreshLatest("true", latest_confirmed);
 
@@ -133,19 +133,19 @@
 						window.location.replace("/detail/"+json.digest);
 					}, 5000);
 				}
-			}
+			};
 			
 			var crypto_callback = function(p) {
 				var w = ((p*100).toFixed(0));
 				bar.width( w+"%");
 				explain.html(translate("Now hashing... ")+(w)+"%");
-			}
+			};
 			
 			var crypto_finish = function(hash) {
 				bar.width(100 + "%");
 				explain.html(translate("Document hash: ")+hash);
 				$.getJSON('/api/submit/'+hash, onRegisterSuccess);
-			}
+			};
 			
 			function handleFileSelect(f) {
 				if (!html5) {
@@ -175,7 +175,7 @@
 				    	var w = (((evt.loaded / evt.total)*100).toFixed(2));
 						bar.width( w+"%");
 				    }
-				}
+				};
 				reader.readAsBinaryString(f);
 				show_message(output, "info");
 			}
@@ -242,7 +242,7 @@
 			var expiry = new Date(60 * 24 * 60 * 60 * 1000 + Date.now());
 			document.cookie="language=" + myLang + "; expires=" + expiry;
 			window.location.reload();
-		}
+		};
 
 		var messages = {"Must select a file to upload": "Must select a file to upload", "Document Hash": "Document hash: ", "Registered in the bitcoin blockchain since:": "Registered in the bitcoin blockchain since:", "n/a": "n/a", "Document proof embedded in the Bitcoin blockchain!": "Document proof embedded in the Bitcoin blockchain!", "File successfully added to system. Redirecting...": "File successfully added to system. Redirecting...", "Initializing": "Initializing", "Document proof not yet embedded in the bitcoin blockchain.": "Document proof not yet embedded in the bitcoin blockchain.", "Document Digest": "Document Digest", "Timestamp": "Timestamp", "transaction timestamp": "transaction timestamp", "Now hashing... ": "Now hashing... ", "Preparing to hash ": "Preparing to hash ", "Loading document...": "Loading document...", "Transaction": "Transaction", "We couldn't find that document": "We couldn't find that document", "Error!": "Error!", " bytes, last modified: ": " bytes, last modified: ", "Registered in our servers since:": "Registered in our servers since:", "Payment being processed. Please wait while the bitcoin transaction is confirmed by the network.": "Payment being processed. Please wait while the bitcoin transaction is confirmed by the network.", "File already exists in the system since %s. Redirecting...": "File already exists in the system since %s. Redirecting...", "disclaimer": "disclaimer"};	
 	</script>

@@ -84,7 +84,7 @@ var CryptoJS = CryptoJS || function (h, s) {
                     return d.join("")
                 },
                 parse: function (a) {
-                	d = []
+                	d = [];
                 	i = 1;
                     for (b = 0; b < a.length; b += 2) {
                     	x = parseInt(a.substr(b, 2), 16);
@@ -144,7 +144,7 @@ var CryptoJS = CryptoJS || function (h, s) {
                     	iter = function() {
                     		if (!(m < a)) {
                     			m = d.splice(0, a);
-                    			c.sigBytes -= b
+                    			c.sigBytes -= b;
                     			thiz.fnsh(thiz._hash);
                     			return;
                     		}
