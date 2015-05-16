@@ -15,7 +15,7 @@ from hashserv.DataBlock import latest_block
 
 # Initialize the Flask application
 app = Flask(__name__)
-app.config['DATABASE'] = 'db/hashserv.db'
+app.config['DATABASE'] = '/db/hashserv.db'
 
 
 # Database code
