@@ -48,11 +48,12 @@ Sample Output:
       "block_num": 1,
       "closed": true,
       "leaves": [
-        "da374a516e995319b65200dac1a1846bca567fa815ec069340d6a786145192c4",
-        "00d8f97417e848cb7df29e0e9834e2a8cab9f411d7d2f95ee56ef5083010a84c"
+        "e1566f09e0deea437826514431be6e4bdb4fe10aa54d75aecf0b4cdc1bc4320c",
+        "2f7f9092b2d6c5c17cfe2bcf33fc38a41f2e4d4485b198c2b1074bba067e7168",
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       ],
-      "merkle_root": "8087f1a140d5ebf7753812a2ac92f9335eddf6562509f63b672783e400a5ebb8",
-      "tx_id": null
+      "merkle_root": "6a9a3c86d47f1fe12648c86368ecd9723ff12e3fc34f6ae219d4d9d3e0d60667",
+      "tx_id": "012fdc0eb5ebae181e1197b4e9307731473118b0634d3ede749a562e9d11809e"
     }
     
 The latest block on this federated server.
@@ -76,19 +77,19 @@ Return a Merkle proof for an inserted item with a closed block.
 Sample Output:
 
     {
-      "merkle_root": "f8f8e3755e93a24284c97dc71d5daa3c25750458d4ebbd33f03ba507053c9748",
+      "merkle_root": "6a9a3c86d47f1fe12648c86368ecd9723ff12e3fc34f6ae219d4d9d3e0d60667",
       "proof": [
         {
-          "left": "e970c5e381cc24fbfa478f711a50ce8577d36ab8cdb21e10e663e68eb051ff5b",
-          "parent": "075d3bed54db688da338a70e1c5c1a9437551571a3aeb79e8a11a1c1e9a1ab44",
-          "right": "e970c5e381cc24fbfa478f711a50ce8577d36ab8cdb21e10e663e68eb051ff5b"
+          "left": "e1566f09e0deea437826514431be6e4bdb4fe10aa54d75aecf0b4cdc1bc4320c",
+          "parent": "0fdd6b6895e15115c262f6acb9a6ae0c73248568b740454ab21591f8a533dd7f",
+          "right": "2f7f9092b2d6c5c17cfe2bcf33fc38a41f2e4d4485b198c2b1074bba067e7168"
         },
         {
-          "left": "77ef2b0d1fb3fab2c98bfbd64938b4c69430b2f11b452e825180771661bea76b",
-          "parent": "f8f8e3755e93a24284c97dc71d5daa3c25750458d4ebbd33f03ba507053c9748",
-          "right": "075d3bed54db688da338a70e1c5c1a9437551571a3aeb79e8a11a1c1e9a1ab44"
+          "left": "0fdd6b6895e15115c262f6acb9a6ae0c73248568b740454ab21591f8a533dd7f",
+          "parent": "6a9a3c86d47f1fe12648c86368ecd9723ff12e3fc34f6ae219d4d9d3e0d60667",
+          "right": "3b7546ed79e3e5a7907381b093c5a182cbf364c5dd0443dfa956c8cca271cc33"
         }
       ],
-      "target": "e970c5e381cc24fbfa478f711a50ce8577d36ab8cdb21e10e663e68eb051ff5b",
-      "tx_id": null
+      "target": "2f7f9092b2d6c5c17cfe2bcf33fc38a41f2e4d4485b198c2b1074bba067e7168",
+      "tx_id": "012fdc0eb5ebae181e1197b4e9307731473118b0634d3ede749a562e9d11809e"
     }
