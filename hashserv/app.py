@@ -73,7 +73,7 @@ def proof(sha256_hash):
             'target': sha256_hash,
             'merkle_root': block.merkle_root(),
             'proof': hash_proof.get_json(),
-            'tx_id': None
+            'tx_id': block.get_tx_id()
         }
         return jsonify(json_proof)
 

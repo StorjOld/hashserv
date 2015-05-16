@@ -1,3 +1,9 @@
+from flask import Flask
+
+app = Flask(__name__)
+app.config.from_object('config')
+
+from btctxstore import BtcTxStore
 from hashserv.Database import latest_hash
 from hashserv.Database import latest_block
 from hashserv.MerkleTree import MerkleTree
@@ -27,11 +33,19 @@ class DataBlock:
             # Get Merkle Root
             self.find_leaves()
             self.close()
+            merkle_root = self.merkle_root()
+
+            # Get TXID
+            blockchain = BtcTxStore()
+            hexdata = merkle_root
+            privatekeys = app.config["PRIVATE_KEYS"]
+            changeaddress = app.config["CHANGE_ADDRESS"]
+            tx_id = blockchain.store(hexdata, privatekeys, changeaddress)
 
             # Close current block
             c = self.conn.cursor()
-            query1 = "UPDATE block_table SET end_hash=?, closed=?, merkle_root=? WHERE id=?"
-            c.execute(query1, (last_hash, True, self.merkle_root(), last_block))
+            query1 = "UPDATE block_table SET end_hash=?, closed=?, merkle_root=?, tx_id=? WHERE id=?"
+            c.execute(query1, (last_hash, True, merkle_root, tx_id, last_block))
 
             # Start new block
             query2 = "INSERT INTO block_table (start_hash) VALUES (?)"
@@ -80,13 +94,20 @@ class DataBlock:
         if self.is_closed():
             return self.merkle_tree.merkle_proof(target)
 
+    def get_tx_id(self):
+        query = 'SELECT tx_id FROM block_table where id=?'
+        cur = self.conn.execute(query, (self.block_num,))
+        block = cur.fetchone()
+        self.tx_id = block[0]
+        return self.tx_id
+
     def to_json(self):
         """For the API."""
         block_data = {
             'block_num': self.block_num,
             'closed': bool(self.closed),
             'merkle_root': self.merkle_root(),
-            'tx_id': self.tx_id,
+            'tx_id': self.get_tx_id(),
             'leaves': self.merkle_tree.leaves
         }
 
