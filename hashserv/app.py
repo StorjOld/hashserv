@@ -64,7 +64,7 @@ def proof(sha256_hash):
         return "Hash Not Found."
     else:
         block = DataBlock(int(num_block[2]), conn)
-        proof = block.merkle_proof(sha256_hash)
+        hash_proof = block.merkle_proof(sha256_hash)
 
         if not block.is_closed():
             return "Block Not Closed."
@@ -72,7 +72,7 @@ def proof(sha256_hash):
         json_proof = {
             'target': sha256_hash,
             'merkle_root': block.merkle_root(),
-            'proof': proof.get_json(),
+            'proof': hash_proof.get_json(),
             'tx_id': None
         }
         return jsonify(json_proof)

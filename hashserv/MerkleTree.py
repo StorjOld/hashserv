@@ -14,6 +14,7 @@ class MerkleBranch:
         self.left = left
         self.right = right
         self.hash_f = hash_f
+        self.parent = None
 
     def get_parent(self):
         """Get the parent of the branch."""
