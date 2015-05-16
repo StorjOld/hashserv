@@ -8,6 +8,6 @@ setup(
 
     #  Uncomment one or more lines below in the install_requires section
     #  for the specific client drivers/modules your application needs.
-    install_requires=['flask'],
+    install_requires=['flask', 'btctxstore'],
     test_suite="tests",
 )

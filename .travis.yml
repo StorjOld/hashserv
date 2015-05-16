@@ -6,7 +6,8 @@ python:
 
 # command to install dependencies, e.g. pip install -r requirements.txt 
 install: 
-  - pip install Flask coverage coveralls
+  - pip install Flask btctxstore
+  - pip install coverage coveralls
 
 # command to run tests, e.g. python setup.py test
 script:  
