@@ -20,6 +20,9 @@ Proof of Existence for any data item that is in our Merkle Tree.
 
 **tldr;** A federated server for building blockchain notarized Merkle trees. 
 
+# Install
+In order to run you need to have a python config file in hashserv/hashserv/config.py
+
 # API
 Add a hash to the queue for the next block. Returns the block number that the data will
 be inserted into. In some cases the hash is a duplicate, so the API will return the block
