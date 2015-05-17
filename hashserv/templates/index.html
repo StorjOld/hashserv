@@ -163,8 +163,7 @@
 				if (!html5) {
 					return;
 				}
-				
-				//files.push(f);
+
 				currentFile = f;
 				
 				explain.html(translate("Loading document..."));
@@ -183,7 +182,6 @@
 					explain.html(translate("Now hashing... ") + translate("Initializing"));
 					setTimeout(function() {
 						CryptoJS.SHA256(data,crypto_callback,crypto_finish);
-						//bindAddedFiles();
 					}, 200);
 					
 				};
