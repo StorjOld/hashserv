@@ -75,6 +75,7 @@
 			var explain = $('#explain');
 			var dropbox = $('.dropbox');
 			var files = [];
+			var currentFile = null;
 
 			// uncomment this to try non-HTML support:
 			//window.File = window.FileReader = window.FileList = window.Blob = null;
@@ -151,6 +152,10 @@
 			var crypto_finish = function(hash) {
 				bar.width(100 + "%");
 				explain.html(translate("Document hash: ")+hash);
+				
+				files.push({file: currentFile, hash: hash});
+				bindAddedFiles();
+				
 				$.getJSON('/api/submit/'+hash, onRegisterSuccess);
 			};
 			
@@ -158,8 +163,8 @@
 				if (!html5) {
 					return;
 				}
-				
-				files.push(f);
+
+				currentFile = f;
 				
 				explain.html(translate("Loading document..."));
 			    var output = "";
@@ -177,7 +182,6 @@
 					explain.html(translate("Now hashing... ") + translate("Initializing"));
 					setTimeout(function() {
 						CryptoJS.SHA256(data,crypto_callback,crypto_finish);
-						bindAddedFiles();
 					}, 200);
 					
 				};
@@ -196,8 +200,9 @@
 					$("#filesContainer").show();
 					$("#filesList").empty();
 					for (var i = 0; i < files.length; i++) {
-						var fileName = files[i].name;
-						$("#filesList").prepend("<li>" + fileName + "</li>");						
+						var fileName = files[i].file.name;
+						var hash = files[i].hash;
+						$("#filesList").prepend("<li>" + fileName + " - " + hash + "</li>");						
 					}
 				}
 			}
