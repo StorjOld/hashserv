@@ -44,19 +44,20 @@
 			
 			<small>Your files are not transferred to the server, everything is done directly in your browser.</small>
 		</div>
-		<div id="filesContainer" style="display:none;">
-			Added Files
-			<ul id="filesList">
-				
-			</ul>
-		</div>
-        <div>
-            Latest Blocks:
-            <ul>
-                {%  for block in range(num_blocks, num_show, -1): %}
-                    <li><a href='/api/block/{{ block }}'>Block {{ block }}</a></li>
-                {% endfor %}
-            </ul>
+		<div class="row">
+			<div class="col-sm-3">
+            	<h4>Latest Blocks</h4>
+	            <ul>
+	                {%  for block in range(num_blocks, num_show, -1): %}
+	                    <li><a href='/api/block/{{ block }}'>Block {{ block }}</a></li>
+	                {% endfor %}
+	            </ul>
+	        </div>
+			<div id="filesContainer" class="col-sm-9" style="display:none;">
+				<h4>Added Files</h4>
+				<ul id="filesList">
+				</ul>
+			</div>
         </div>
 	</div>
 	<script>
