@@ -9,7 +9,7 @@ install:
   - pip install coverage coveralls
 
 before_script:
-  - python hashserv/app.py
+  - python hashserv/app.py &
 
 # run tests, e.g. python setup.py test
 script:  
