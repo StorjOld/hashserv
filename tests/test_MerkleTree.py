@@ -115,3 +115,36 @@ class MerkleTreeTest(unittest.TestCase):
         proof = MerkleProof(target, tree)
         proof.add(branch)
         self.assertFalse(proof.is_valid())
+
+    # generic test from @maraoz
+    def generic_content_test(self, data, ans):
+        tree = MerkleTree()
+        for datum in data:
+            tree.add_content(datum)
+        result = tree.merkle_root()
+        self.assertEqual(result, ans)
+
+    def generic_hash_test(self, data, ans):
+        tree = MerkleTree()
+        for datum in data:
+            tree.add_hash(datum)
+        result = tree.merkle_root()
+        self.assertEqual(result, ans)
+
+    def test_merkle_bitcoin_vectors(self):
+        # merkletree for livenet block 000000000003ba27aa200b1cecaad478d2b00432346c3f1f3986da1afd33e506
+        txs = [
+            "8c14f0db3df150123e6f3dbbf30f8b955a8249b62ac1d1ff16284aefa3d06d87",
+            "fff2525b8931402dd09222c50775608f75787bd2b87e56995a7bdd30f79702c4",
+            "6359f0868171b1d194cbee1af2f16ea598ae8fad666d9b012c8ed2b79a236ec4",
+            "e9a66845e05d5abc0ad04ec80f774a7e585c6e8db975962d069a522137b80c1d",
+        ]
+
+        ans = 'f3e94742aca4b5ef85488dc37c06c3282295ffec960994b2c0d5ac2a25a95766'
+        self.generic_hash_test(txs, ans)
+
+    def test_merkle_node_vectors(self):
+        # see https://github.com/maraoz/merkle/blob/sha256/test/main.js#L32
+        data = ['a', 'b', 'c', 'd', 'e']
+        ans = '16e6beb3e080910740a2923d6091618caa9968aead8a52d187d725d199548e2c'
+        self.generic_content_test(data, ans)

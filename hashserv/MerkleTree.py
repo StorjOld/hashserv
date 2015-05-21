@@ -5,7 +5,9 @@ import hashlib
 def sha256(content):
     """Finds the sha256 hash of the content."""
     content = content.encode('utf-8')
-    return hashlib.sha256(content).hexdigest()
+    hash1 = hashlib.sha256(content).hexdigest()
+    hash1 = hash1.encode('utf-8')
+    return hashlib.sha256(hash1).hexdigest()
 
 
 class MerkleBranch:
