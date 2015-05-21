@@ -2,3 +2,5 @@
 .coverage
 config.py
 .db
+hashserv/config.py
+venv

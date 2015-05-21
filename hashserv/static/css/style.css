@@ -25,6 +25,22 @@ p, small {
   font-family: "Muli", sans-serif;
   color: #DCE3FF;
 }
+a {
+  color: #DCE3FF;
+}
+a:hover, a:focus {
+  color: #fff;
+  text-decoration: underline;
+}
+ul {
+  padding-left: 0;
+}
+li {
+  list-style-type: none;
+  padding: 5px 0;
+  line-height: 25px;
+  color: #DCE3FF;
+}
 .icon {
   font-size: 72px;
   line-height: 40px;
@@ -50,6 +66,7 @@ p, small {
 }
 #content {
   text-align: center;
+  margin-bottom: 40px;
 }
 #explain {
   margin-top: 2em;
