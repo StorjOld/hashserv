@@ -28,7 +28,7 @@ Add a hash to the queue for the next block. Returns the block number that the da
 be inserted into. In some cases the hash is a duplicate, so the API will return the block
 number that the hash is in.
     
-    GET /api/submit/<sha256_hash>
+    GET /api/submit/<sha256_hash>/
         Parameters:
         - sha256_hash
         Returns:
@@ -39,7 +39,7 @@ Sample Output:
 
 Returns the content of a particular block.
     
-    GET /api/block/<block_num>
+    GET /api/block/<block_num>/
 		Parameters:
 		- block_num
 		Returns:
@@ -61,7 +61,7 @@ Sample Output:
     
 The latest block on this federated server.
     
-    GET /api/block/latest_block
+    GET /api/block/latest_block/
         Returns:
         - Block number of the latest block
         
@@ -71,7 +71,7 @@ Sample Output:
 
 Return a Merkle proof for an inserted item with a closed block.
 
-    GET /api/proof/<sha256_hash>
+    GET /api/proof/<sha256_hash>/
          Parameters:
         - sha256_hash
         Returns:
@@ -96,3 +96,13 @@ Sample Output:
       "target": "2f7f9092b2d6c5c17cfe2bcf33fc38a41f2e4d4485b198c2b1074bba067e7168",
       "tx_id": "012fdc0eb5ebae181e1197b4e9307731473118b0634d3ede749a562e9d11809e"
     }
+    
+Notarize the current block, and start a new one.
+
+    GET /api/block/generate/
+        Returns:
+        - Number of block written in the blockchain
+        
+Sample Output:
+
+    Block 3 Built.
