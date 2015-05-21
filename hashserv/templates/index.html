@@ -15,6 +15,9 @@
 </head>
 
 <body>
+	<div class="progress progress-striped">
+    	<div class="bar"></div>
+	</div>
 	<div class="container">
 		<div id="message" class="row"></div>
 		<div style="margin-top:48px;" class="notifications bottom-right"></div>
@@ -101,7 +104,7 @@
 
 			// latest documents
 			var refreshLatest = function(confirmed, table) {
-				$.getJSON('/api/document/latest?confirmed='+confirmed, function(data) {
+				$.getJSON('/api/block/latest?confirmed='+confirmed, function(data) {
 					var items = [];
 
 					items.push('<thead><tr><th></th><th>' + translate('Document Digest') + '</th><th>'
@@ -157,7 +160,7 @@
 				files.push({file: currentFile, hash: hash});
 				bindAddedFiles();
 				
-				$.getJSON('/api/submit/'+hash, onRegisterSuccess);
+				$.getJSON('/api/submit/'+hash, function(data){ console.log(data); });
 			};
 			
 			function handleFileSelect(f) {
@@ -203,7 +206,7 @@
 					for (var i = 0; i < files.length; i++) {
 						var fileName = files[i].file.name;
 						var hash = files[i].hash;
-						$("#filesList").prepend("<li>" + fileName + " - <a href='api/proof/" + hash + "'>" + hash + "</a></li>");
+						$("#filesList").prepend('<li><span class="filename">' + fileName + '</span> - <span class="filehash"><a href="api/proof/' + hash + '">' + hash + '</a></span></li>');
 					}
 				}
 			}
