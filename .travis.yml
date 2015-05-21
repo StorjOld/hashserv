@@ -13,8 +13,8 @@ before_script:
 
 # run tests, e.g. python setup.py test
 script:  
-#  - python -m unittest discover -v
-  - coverage run -m unittest discover -v
+#  - coverage run -m unittest discover -v
+  - coverage run --source="hashserv" setup.py test
 
 # run coverage
 after_success:
