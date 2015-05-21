@@ -3,17 +3,20 @@ python:
   - "3.4"
   - "3.3"
 
-# command to install dependencies, e.g. pip install -r requirements.txt 
+# install dependencies, e.g. pip install -r requirements.txt
 install: 
   - pip install Flask btctxstore
   - pip install coverage coveralls
 
-# command to run tests, e.g. python setup.py test
+before_script:
+  - python hashserv/app.py
+
+# run tests, e.g. python setup.py test
 script:  
 #  - python -m unittest discover -v
   - coverage run -m unittest discover -v
-  - python hashserv/app.py
 
+# run coverage
 after_success:
   - coveralls
 
