@@ -3,6 +3,7 @@
 config.py
 .db
 hashserv/config.py
+hashserv.db
 venv
 *.egg
 *.egg-info/

@@ -36,12 +36,15 @@ class DataBlock:
             merkle_root = self.merkle_root()
 
             # Get TXID
-            blockchain = BtcTxStore()
             hexdata = merkle_root
             privatekeys = app.config["PRIVATE_KEYS"]
             changeaddress = app.config["CHANGE_ADDRESS"]
+            fee = app.config["FEE"]
+            testnet = app.config["TESTNET"]
+            blockchain = BtcTxStore(testnet=testnet)
             tx_id = blockchain.storenulldata(hexdata, privatekeys, 
-                                             changeaddress=changeaddress)
+                                             changeaddress=changeaddress,
+                                             fee=fee)
 
             # Close current block
             c = self.conn.cursor()
