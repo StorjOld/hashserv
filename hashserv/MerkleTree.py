@@ -91,7 +91,7 @@ class MerkleTree:
         # Generate list we can mutate
         hashes = self.leaves
 
-        # Reduce list till we have a merkle root
+        # Generate parent rows until we are left with a merkle root
         while len(hashes) > 1:
             hashes = self.merkle_pair(hashes)
         return hashes[0]
@@ -99,23 +99,28 @@ class MerkleTree:
     def merkle_pair(self, hashes, target=None):
         """
         Take a list of hashes, and return the parent row in the tree
-        of merkle hashes. Optionally takes a target, in which case it
-        will return a branch of the proof.
+        of merkle hashes. Optionally takes a target hash, and will only
+        return part of the tree that corresponds with that hash.
         """
         # if odd then append first entry to the end of the list
         if len(hashes) % 2 == 1:
             hashes = list(hashes)
             hashes.append(hashes[-1])
         l = []
+        # create an entry in the parent row for each pair in the current row
         for i in range(0, len(hashes), 2):
             l.append(self.hash_f(hashes[i] + hashes[i + 1]))
+            # (optional) if the target hash is in the current row, return
+            # only that pair as a MerkleBranch object
             if target == hashes[i] or target == hashes[i + 1]:
                 return MerkleBranch(hashes[i], hashes[i + 1], self.hash_f)
 
         if target is None:
-            return l
+            return l  # return the parent row
         else:
-            return MerkleBranch(hashes[len(hashes)-2], hashes[len(hashes)-1], self.hash_f)
+            # (optional) the target hash was not found so we return
+            # and empty MerkleBranch
+            return MerkleBranch("", "", self.hash_f)
 
     def merkle_proof(self, target):
         """Gives the merkle proof of a particular leaf in the root."""
