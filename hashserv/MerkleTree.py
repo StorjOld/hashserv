@@ -115,7 +115,7 @@ class MerkleTree:
         if target is None:
             return l
         else:
-            return MerkleBranch(hashes[i], hashes[i + 1], self.hash_f)
+            return MerkleBranch(hashes[len(hashes)-2], hashes[len(hashes)-1], self.hash_f)
 
     def merkle_proof(self, target):
         """Gives the merkle proof of a particular leaf in the root."""
