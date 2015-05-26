@@ -5,7 +5,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 import sqlite3
 from contextlib import closing
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, make_response
 
 # Application imports
 from hashserv.DataHash import DataHash
@@ -47,9 +47,9 @@ def submit(sha256_hash):
     """Submit a SHA256 hash to an most recent open block."""
     datahash = DataHash(sha256_hash, connect_db())
     if not datahash.is_sha256():
-        return "400: Invalid SHA256 Hash."
+        return make_response("400: Invalid SHA256 Hash.", 400)
     else:
-        return str(datahash.to_db())
+        return make_response(str(datahash.to_db()), 200)
 
 
 @app.route('/api/proof/<sha256_hash>')
@@ -61,7 +61,7 @@ def proof(sha256_hash):
     num_block = datahash.check_db()
 
     if num_block is None:
-        return "Hash Not Found."
+        return make_response("Hash Not Found.", 404)
     else:
         block = DataBlock(int(num_block[2]), conn)
         hash_proof = block.merkle_proof(sha256_hash)
@@ -75,7 +75,7 @@ def proof(sha256_hash):
             'proof': hash_proof.get_json(),
             'tx_id': block.get_tx_id()
         }
-        return jsonify(json_proof)
+        return make_response(jsonify(json_proof), 200)
 
 
 @app.route('/api/block/generate')
@@ -87,18 +87,20 @@ def close_block():
     return str(block.generate_block())
 
 
-@app.route('/api/block/<block_num>')
+@app.route('/api/block/<int:block_num>')
 def show_block(block_num):
     """Shows the metadata for a particular block."""
     try:
         block = DataBlock(block_num, connect_db())
         block.find_leaves()  # load object from db
         block.get_tx_id()
-        return jsonify(block.to_json())
+        return make_response(jsonify(block.to_json()), 200)
     except LookupError:
-        return "Empty Block."
+        return make_response("Empty Block.", 204)
     except ValueError:
-        return "Invalid Parameter."
+        return make_response("Invalid Parameter.", 400)
+    except OverflowError:
+        return make_response("Invalid Parameter. Integer Too Large.", 400)
 
 
 @app.route('/api/block/latest')
