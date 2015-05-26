@@ -10,7 +10,7 @@ install:
   - python setup.py develop # install dependencies
 
 before_script:
-  - python -c 'from hashserv.app import init_db; init_db()'
+  - python -c "from hashserv.app import init_db; init_db()"
   - python hashserv/app.py &
 
 # run tests, e.g. python setup.py test
