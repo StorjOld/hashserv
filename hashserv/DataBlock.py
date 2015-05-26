@@ -40,7 +40,8 @@ class DataBlock:
             hexdata = merkle_root
             privatekeys = app.config["PRIVATE_KEYS"]
             changeaddress = app.config["CHANGE_ADDRESS"]
-            tx_id = blockchain.store(hexdata, privatekeys, changeaddress)
+            tx_id = blockchain.storenulldata(hexdata, privatekeys, 
+                                             changeaddress=changeaddress)
 
             # Close current block
             c = self.conn.cursor()
