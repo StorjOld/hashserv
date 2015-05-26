@@ -206,8 +206,8 @@
 						$("#filesList").prepend('<li><span class="filename">' + fileName + '</span> - <span class="filehash"><a href="api/proof/' + hash + '">' + hash + '</a></span></li>');
 					}
 				}
-			}
-			
+			};
+
 			document.getElementById('file').addEventListener('change', function(evt) {
 				var f = evt.target.files[0];
 				handleFileSelect(f);
