@@ -4,3 +4,5 @@ config.py
 .db
 hashserv/config.py
 venv
+*.egg
+*.egg-info/
