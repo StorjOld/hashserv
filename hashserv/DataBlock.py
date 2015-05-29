@@ -1,8 +1,4 @@
 from flask import Flask
-
-app = Flask(__name__)
-app.config.from_pyfile('config.py')
-
 from btctxstore import BtcTxStore
 from hashserv.Database import latest_hash
 from hashserv.Database import latest_block
@@ -10,15 +6,25 @@ from hashserv.MerkleTree import MerkleTree
 from flask.ext.sqlalchemy import SQLAlchemy
 
 
-class DataBlock:
-    def __init__(self, block_num, conn=None):
-        """Validating and inserting data hashes into the database."""
-        self.conn = conn
+# Initialize the Flask application
+app = Flask(__name__)
+app.config.from_pyfile('config.py')
+db = SQLAlchemy(app)
 
-        self.block_num = int(block_num)
+
+class DataBlock:
+    id = db.Column(db.Integer, primary_key=True)
+    start_hash = db.Column(db.Integer)
+    end_hash = db.Column(db.Integer)
+    closed = db.Column(db.Boolean)
+    merkle_root = db.Column(db.String(128), unique=True)
+    tx_id = db.Column(db.String(128), unique=True)
+
+    def __init__(self, block_num, start_hash):
+        """Validating and inserting data hashes into the database."""
+        self.id = int(block_num)
+        self.start_hash = start_hash
         self.merkle_tree = MerkleTree()
-        self.closed = False
-        self.tx_id = None
 
     def close(self):
         """Close block, so a Merkle root can be generated."""

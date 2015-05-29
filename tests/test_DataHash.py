@@ -1,14 +1,11 @@
 from flask import Flask
-from hashserv.DataHash import DataHash
-from flask.ext.testing import TestCase
-
 from hashserv.DataHash import db
+from flask.ext.testing import TestCase
+from hashserv.DataHash import DataHash
+from hashserv.DataBlock import DataBlock
 
 
 class DataHashTest(TestCase):
-
-    SQLALCHEMY_DATABASE_URI = "sqlite:///C:/db/hashserv_test.db"
-    TESTING = True
 
     def test_valid_sha256(self):
         valid_hash = '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08'
@@ -20,13 +17,15 @@ class DataHashTest(TestCase):
         self.assertFalse(data.is_sha256())
 
     def create_app(self):
-        # pass in test configuration
         app = Flask(__name__)
         app.config['TESTING'] = True
         return app
 
     def setUp(self):
         db.create_all()
+        block = DataBlock(1, 1)
+        db.session.add(block)
+        db.session.commit()
 
     def tearDown(self):
         db.session.remove()
