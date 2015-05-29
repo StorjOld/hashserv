@@ -1,39 +1,51 @@
+from flask import Flask
 from hashserv.Database import latest_block
+from flask.ext.sqlalchemy import SQLAlchemy
 
 
-class DataHash:
-    def __init__(self, ahash, conn=None):
+# Initialize the Flask application
+app = Flask(__name__)
+app.config.from_pyfile('config.py')
+db = SQLAlchemy(app)
+
+
+class DataHash(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    uhash = db.Column(db.String(128), unique=True)
+    block = db.Column(db.Integer)
+
+    def __init__(self, uhash, block=None):
         """A hashed data object."""
-        self.conn = conn
-        self.ahash = ahash
+        self.uhash = uhash
+        self.block = block
+
+    def __repr__(self):
+        return '<Hash: %r>' % self.uhash
 
     def is_sha256(self):
         """Make sure this is actually an valid SHA256 hash."""
         digits58 = '0123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
-        for i in range(len(self.ahash)):
-            if not self.ahash[i] in digits58:
+        for i in range(len(self.uhash)):
+            if not self.uhash[i] in digits58:
                 return False
-        return len(self.ahash) == 64
+        return len(self.uhash) == 64
 
     def check_db(self):
         """Make sure there is no duplicate hash."""
-        query = "SELECT * FROM hash_table WHERE hash=?"
-        cur = self.conn.execute(query, (self.ahash,))
-        return cur.fetchone()
+        return self.query.filter_by(uhash=self.uhash).first()
 
     def to_db(self):
         """Insert hash into the database."""
 
         # Check for duplicates and get latest block number
         block_num = self.check_db()
-        last_block = latest_block(self.conn)
+        last_block = 0  # latest_block(self.conn)
 
         # If not duplicate then insert
         if block_num is None:
-            query = "INSERT INTO hash_table (hash, block) VALUES (?, ?)"
-            self.conn.execute(query, (self.ahash, last_block,))
-            self.conn.commit()
+            db.session.add(self)
+            db.session.commit()
             return last_block
         else:
             # It is a duplicate so return its block number
-            return block_num[2]
+            return block_num.block

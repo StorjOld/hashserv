@@ -8,7 +8,7 @@ setup(
 
     #  Uncomment one or more lines below in the install_requires section
     #  for the specific client drivers/modules your application needs.
-    install_requires=['flask', 'btctxstore>=2.0.2'],
+    install_requires=['flask', 'Flask-SQLAlchemy', 'Flask-Testing', 'btctxstore>=2.0.2'],
     tests_require=['coverage', 'coveralls'],
     test_suite="tests",
 )

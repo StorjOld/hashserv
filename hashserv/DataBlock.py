@@ -7,6 +7,7 @@ from btctxstore import BtcTxStore
 from hashserv.Database import latest_hash
 from hashserv.Database import latest_block
 from hashserv.MerkleTree import MerkleTree
+from flask.ext.sqlalchemy import SQLAlchemy
 
 
 class DataBlock:
