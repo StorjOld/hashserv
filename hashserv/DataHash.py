@@ -1,5 +1,4 @@
 from flask import Flask
-from hashserv.Database import latest_block
 from flask.ext.sqlalchemy import SQLAlchemy
 
 

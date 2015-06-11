@@ -15,7 +15,7 @@ class DataHashTest(unittest.TestCase):
 
     def tearDown(self):
         db.session.remove()
-        #db.drop_all()
+        db.drop_all()
 
     # test cases
     def test_valid_sha256(self):
