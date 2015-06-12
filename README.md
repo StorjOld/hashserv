@@ -1,4 +1,4 @@
-# hashserv
+# chainpoint
 
 [![Build Status](https://travis-ci.org/Storj/hashserv.svg?branch=master)]
 (https://travis-ci.org/Storj/hashserv) 
