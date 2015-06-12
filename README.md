@@ -47,7 +47,8 @@ Success Example:
 	    		"block": 5
 	    	}
 	    	
-Fail Examples:
+Fail Example:
+
 	GET /api/submit/invalidhash/
 	RESPONSE:
 		Status Code: 400
