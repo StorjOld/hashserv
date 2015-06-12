@@ -58,3 +58,36 @@ Fail Example:
 				"error-code": 400
 			}
 	
+### Get Block
+Returns the content of a particular block.
+
+	GET /api/block/<block_num>/
+        
+Success Example:
+
+	GET /api/block/1/
+	RESPONSE:
+		Status Code: 200
+		Payload:
+			{
+				"block_num": 1,
+				"closed": true,
+				"leaves": [
+					"e1566f09e0deea437826514431be6e4bdb4fe10aa54d75aecf0b4cdc1bc4320c",
+					"2f7f9092b2d6c5c17cfe2bcf33fc38a41f2e4d4485b198c2b1074bba067e7168",
+					"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+				],
+				"merkle_root": "6a9a3c86d47f1fe12648c86368ecd9723ff12e3fc34f6ae219d4d9d3e0d60667",
+				"tx_id": "012fdc0eb5ebae181e1197b4e9307731473118b0634d3ede749a562e9d11809e"
+			}
+
+Fail Example:
+
+	GET /api/block/999/
+	RESPONSE:
+		Status Code: 404
+		Payload:
+			{
+				"error": "Block not found."
+				"error-code": 404
+			}
